@@ -8,16 +8,26 @@
 
 import UIKit
 
+enum DisplayMode {
+    case operation
+    case algorithm
+    case test
+}
+
 class OperationViewCell: UICollectionViewCell {
     
     // MARK: - Variables
     
     private var cardView: OperationCardView!
+    private var testView: TestCardView!
+    private var operation: Operation!
+    private var displayMode: DisplayMode!
     
     // MARK: - Initialization
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        displayMode = .operation
         setupViews()
     }
     
@@ -29,7 +39,21 @@ class OperationViewCell: UICollectionViewCell {
     
     private func setupViews() {
         cardView = OperationCardView()
+        cardView.isHidden = true
         addSubview(cardView)
+        
+        testView = TestCardView()
+        testView.isHidden = true
+        addSubview(testView)
+        
+        switch displayMode {
+        case .operation:
+            cardView.isHidden = false
+        case .test:
+            testView.isHidden = false
+        default:
+            print("todo")
+        }
         
         setupConstraints()
     }
@@ -38,10 +62,62 @@ class OperationViewCell: UICollectionViewCell {
         cardView.snp.makeConstraints{ make in
             make.edges.equalToSuperview().inset(10)
         }
+        testView.snp.makeConstraints{ make in
+            make.edges.equalToSuperview().inset(10)
+        }
     }
     
     public func configure(operation: Operation) {
         cardView.configure(operation: operation)
+        cardView.button.addTarget(self, action: #selector(toggleCards), for: .touchUpInside)
+        
+        testView.configure(operation: operation)
+        testView.backButton.addTarget(self, action: #selector(toggleCards), for: .touchUpInside)
+        self.operation = operation
     }
+    
+    // MARK: - User Interactions
+    
+    @objc private func toggleCards() {
+        switch displayMode {
+        case .operation:
+            presentTestCardView()
+            displayMode = .test
+        case .test:
+            presentOperationCardView()
+            displayMode = .operation
+        default:
+            print("todo")
+        }
+    }
+    
+    private func presentOperationCardView() {
+        bringSubviewToFront(testView)
+        cardView.isHidden = false
+        cardView.alpha = 0
+        UIView.animate(withDuration: 1, animations: {
+            self.testView.frame.origin = CGPoint(x: self.testView.frame.origin.x, y: self.testView.frame.origin.y + 600)
+            self.cardView.alpha = 1
+        }, completion:{ (finished: Bool) -> Void in
+            self.testView.isHidden = true
+            self.testView.frame.origin = CGPoint(x: self.testView.frame.origin.x, y: self.testView.frame.origin.y - 600)
+        })
+    }
+    
+    private func presentTestCardView() {
+        bringSubviewToFront(testView)
+        testView.isHidden = false
+        testView.alpha = 1
+        testView.frame.origin = CGPoint(x: self.testView.frame.origin.x, y: self.testView.frame.origin.y + 600)
+        UIView.animate(withDuration: 1, animations: {
+            self.testView.frame.origin = CGPoint(x: self.testView.frame.origin.x, y: self.testView.frame.origin.y - 600)
+            self.cardView.alpha = 0
+        }, completion:{ (finished: Bool) -> Void in
+            self.cardView.isHidden = true
+        })
+    }
+    
+
+
 
 }

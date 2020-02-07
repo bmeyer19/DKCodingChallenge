@@ -27,8 +27,7 @@ public class DataService {
             swingData.append(swing)
         }
         
-        
-        print(CodingChallenge.shared.backSearchContinuityWithinRange(data: swingData, indexBegin: 20, indexEnd: 4, thresholdLo: 2, thresholdHi: 6, winLength: 6))
+        print(CodingChallenge.shared.searchMultiContinuityWithinRange(data: swingData, indexBegin: 0, indexEnd: 1000, thresholdLo: 6, thresholdHi: 9, winLength: 10))
     }
     
     public func printDataSummary() {

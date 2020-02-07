@@ -13,6 +13,7 @@ enum Operation {
     case backSearchContinuityWithinRange
     case searchContinuityAboveValueTwoSignals
     case searchMultiContinuityWithinRange
+    case none
     
     public func getTitle() -> String {
         switch self {
@@ -25,22 +26,23 @@ enum Operation {
         case .searchMultiContinuityWithinRange:
             return "Search Multi Continuity Within Range"
         default:
-            return "Empty"
+            return "None"
         }
     }
     
-    public func getView() -> UIView {
+    public func getText() -> String {
         switch self {
         case .searchContinuityAboveValue:
-            return UIView()
+            return "From indexBegin to indexEnd, search data for values that are higher than threshold. Return the first index where data has values that meet this criteria for at least winLength samples in a row."
         case .backSearchContinuityWithinRange:
-            return UIView()
+            return "From indexBegin to indexEnd (where indexBegin is larger than indexEnd), search data for values that are higher than thresholdLo and lower than thresholdHi. Return the first index where data has values that meet this criteria for at least winLength samples in a row."
         case .searchContinuityAboveValueTwoSignals:
-            return UIView()
+            return "From indexBegin to indexEnd, search data1 for values that are higher than threshold1 and also search data2 for values that are higher than threshold2. Return the first index where both data1 and data2 have values that meet these criteria for at least winLength samples in a row."
         case .searchMultiContinuityWithinRange:
-            return UIView()
+            return "From indexBegin to indexEnd, search data for values that are higher than thresholdLo and lower than thresholdHi. Return the the starting index and ending index of all continuous samples that meet this criteria for at least winLength data points."
         default:
-            return UIView()
+            return "None"
         }
     }
+    
 }

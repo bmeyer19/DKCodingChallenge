@@ -12,7 +12,7 @@ class OperationCollectionView: UICollectionView {
     
     // MARK: - Variables
     
-    private let inset: CGFloat = 50
+    private let inset: CGFloat = 40
     
     // MARK: - Initialization
     

@@ -13,7 +13,9 @@ class OperationCardView: UIView {
     // MARK: - Variables
     
     private var title: UILabel!
-    private var bodyView: UIView!
+    private var body: UITextView!
+    public var button: UIButton!
+    private var operation: Operation!
     
     // MARK: - Initialization
 
@@ -33,41 +35,44 @@ class OperationCardView: UIView {
         backgroundColor = .DKBody
         layer.cornerRadius = 5
         
-        title = UILabel()
-        title.textColor = .white
+        title = DKLabel()
         title.numberOfLines = 2
-        title.font = .systemFont(ofSize: 18, weight: .semibold)
         addSubview(title)
         
-        bodyView = UIView()
-        addSubview(bodyView)
+        body = DKTextView()
+        addSubview(body)
+        
+        button = DKButton()
+        button.setTitle("Test", for: .normal)
+        addSubview(button)
         
         setupConstraints()
     }
     
     private func setupConstraints() {
         title.snp.makeConstraints{ make in
-            make.left.right.top.equalToSuperview().inset(20)
+            make.top.equalToSuperview().inset(10)
+            make.left.right.equalToSuperview().inset(20)
             make.height.equalTo(60)
         }
-        bodyView.snp.makeConstraints{ make in
-            make.top.equalTo(title.snp.bottom)
-            make.left.right.bottom.equalToSuperview()
+        body.snp.makeConstraints{ make in
+            make.top.equalTo(title.snp.bottom).offset(10)
+            make.left.right.equalToSuperview().inset(20)
+            make.bottom.equalTo(button.snp.top).offset(-20)
+        }
+        button.snp.makeConstraints{ make in
+            make.left.right.bottom.equalToSuperview().inset(20)
+            make.height.equalTo(45)
         }
     }
+    
+
     
     // MARK: - Functions
     
     public func configure(operation: Operation) {
         title.text = operation.getTitle()
-        
-        bodyView.removeFromSuperview()
-        bodyView = operation.getView()
-        addSubview(bodyView)
-        bodyView.snp.makeConstraints{ make in
-            make.top.equalTo(title.snp.bottom)
-            make.left.right.bottom.equalToSuperview()
-        }
+        body.text = operation.getText()
     }
 
 

@@ -100,7 +100,7 @@ class CodingChallenge {
         var continuousSwingsWithinRange = 0
         for index in Range(indexBegin...indexEnd) {
             var swingHasValueWithinRange = false
-            let swing = data[value]
+            let swing = data[index]
             for value in swing.getValues() {
                 if value > thresholdLo && value < thresholdHi {
                     swingHasValueWithinRange = true
