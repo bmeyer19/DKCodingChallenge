@@ -16,6 +16,7 @@
 		4A99F2EC23ECD6180046001D /* OperationViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99F2EB23ECD6180046001D /* OperationViewLayout.swift */; };
 		4A99F2EE23ECD8AF0046001D /* OperationCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99F2ED23ECD8AF0046001D /* OperationCollectionView.swift */; };
 		4A99F2F023ECE8970046001D /* OperationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99F2EF23ECE8970046001D /* OperationCardView.swift */; };
+		4A99F2F323ECF3F90046001D /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99F2F223ECF3F90046001D /* Operation.swift */; };
 		4AA5987623E906DB001DD4AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5987523E906DB001DD4AA /* AppDelegate.swift */; };
 		4AA5987A23E906DB001DD4AA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5987923E906DB001DD4AA /* ViewController.swift */; };
 		4AA5987F23E906DC001DD4AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AA5987E23E906DC001DD4AA /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 		4A99F2EB23ECD6180046001D /* OperationViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationViewLayout.swift; sourceTree = "<group>"; };
 		4A99F2ED23ECD8AF0046001D /* OperationCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationCollectionView.swift; sourceTree = "<group>"; };
 		4A99F2EF23ECE8970046001D /* OperationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationCardView.swift; sourceTree = "<group>"; };
+		4A99F2F223ECF3F90046001D /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
 		4AA5987223E906DB001DD4AA /* DKCodingChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DKCodingChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AA5987523E906DB001DD4AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4AA5987923E906DB001DD4AA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -81,13 +83,21 @@
 			isa = PBXGroup;
 			children = (
 				4AA5987923E906DB001DD4AA /* ViewController.swift */,
-				4A99F2E723ECD1010046001D /* OperationView.swift */,
-				4A99F2E923ECD48E0046001D /* OperationViewCell.swift */,
-				4A99F2EB23ECD6180046001D /* OperationViewLayout.swift */,
-				4A99F2ED23ECD8AF0046001D /* OperationCollectionView.swift */,
-				4A99F2EF23ECE8970046001D /* OperationCardView.swift */,
+				4A99F2F123ECF2950046001D /* OperationView */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		4A99F2F123ECF2950046001D /* OperationView */ = {
+			isa = PBXGroup;
+			children = (
+				4A99F2E723ECD1010046001D /* OperationView.swift */,
+				4A99F2EB23ECD6180046001D /* OperationViewLayout.swift */,
+				4A99F2ED23ECD8AF0046001D /* OperationCollectionView.swift */,
+				4A99F2E923ECD48E0046001D /* OperationViewCell.swift */,
+				4A99F2EF23ECE8970046001D /* OperationCardView.swift */,
+			);
+			path = OperationView;
 			sourceTree = "<group>";
 		};
 		4AA5986923E906DB001DD4AA = {
@@ -138,6 +148,7 @@
 			children = (
 				4AA5988E23E90851001DD4AA /* DataService.swift */,
 				4AA5988C23E90847001DD4AA /* Swing.swift */,
+				4A99F2F223ECF3F90046001D /* Operation.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -283,6 +294,7 @@
 				4A99F2EC23ECD6180046001D /* OperationViewLayout.swift in Sources */,
 				4AA5987623E906DB001DD4AA /* AppDelegate.swift in Sources */,
 				4AA5988D23E90847001DD4AA /* Swing.swift in Sources */,
+				4A99F2F323ECF3F90046001D /* Operation.swift in Sources */,
 				4A99F2EA23ECD48E0046001D /* OperationViewCell.swift in Sources */,
 				4A99F2E123ECCA170046001D /* UIColor + Util.swift in Sources */,
 			);

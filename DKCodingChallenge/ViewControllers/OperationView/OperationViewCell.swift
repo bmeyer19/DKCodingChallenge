@@ -39,5 +39,9 @@ class OperationViewCell: UICollectionViewCell {
             make.edges.equalToSuperview().inset(10)
         }
     }
+    
+    public func configure(operation: Operation) {
+        cardView.configure(operation: operation)
+    }
 
 }

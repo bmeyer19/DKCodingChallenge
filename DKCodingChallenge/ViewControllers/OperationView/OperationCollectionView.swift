@@ -17,9 +17,8 @@ class OperationCollectionView: UICollectionView {
     // MARK: - Initialization
     
     init(size: CGSize) {
-       
         let cellWidth = size.width - inset * 2
-        let cellHeight = size.width - 30
+        let cellHeight = size.height - 20
         
         let layout = OperationViewLayout()
         layout.itemSize = CGSize(width: cellWidth, height: cellHeight)

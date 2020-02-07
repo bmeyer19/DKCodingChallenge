@@ -16,6 +16,11 @@ class OperationView: UIView {
     private var collectionView : UICollectionView!
     private let cellId = "operationCell"
     private var size : CGSize!
+    private var operations : [Operation] = [
+        .searchContinuityAboveValue,
+        .backSearchContinuityWithinRange,
+        .searchContinuityAboveValueTwoSignals,
+        .searchMultiContinuityWithinRange]
 
     // MARK: - Lifecycle
     
@@ -56,11 +61,13 @@ extension OperationView : UICollectionViewDelegate {
 
 extension OperationView : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return operations.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! OperationViewCell
+        let cell : OperationViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! OperationViewCell
+        let operation = operations[indexPath.row]
+        cell.configure(operation: operation)
         return cell
     }
     

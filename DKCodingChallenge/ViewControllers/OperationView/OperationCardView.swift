@@ -13,12 +13,13 @@ class OperationCardView: UIView {
     // MARK: - Variables
     
     private var title: UILabel!
-    private var button: UIButton!
+    private var bodyView: UIView!
     
     // MARK: - Initialization
 
     init() {
         super.init(frame: .zero)
+        applyShadow(color: .black)
         setupViews()
     }
     
@@ -31,19 +32,16 @@ class OperationCardView: UIView {
     private func setupViews() {
         backgroundColor = .DKBody
         layer.cornerRadius = 5
-        applyShadow(color: .black)
         
         title = UILabel()
         title.textColor = .white
+        title.numberOfLines = 2
         title.text = "Operation"
-        title.font = .systemFont(ofSize: 20, weight: .semibold)
+        title.font = .systemFont(ofSize: 18, weight: .semibold)
         addSubview(title)
         
-        button = UIButton()
-        button.setTitle("Run", for: .normal)
-        button.backgroundColor = .DKBodyLight
-        button.layer.cornerRadius = 5
-        addSubview(button)
+        bodyView = UIView()
+        addSubview(bodyView)
         
         setupConstraints()
     }
@@ -51,12 +49,27 @@ class OperationCardView: UIView {
     private func setupConstraints() {
         title.snp.makeConstraints{ make in
             make.left.right.top.equalToSuperview().inset(20)
-            make.height.equalTo(30)
+            make.height.equalTo(60)
         }
-        button.snp.makeConstraints{ make in
-            make.left.right.bottom.equalToSuperview().inset(20)
-            make.height.equalTo(50)
+        bodyView.snp.makeConstraints{ make in
+            make.top.equalTo(title.snp.bottom)
+            make.left.right.bottom.equalToSuperview()
         }
     }
+    
+    // MARK: - Functions
+    
+    public func configure(operation: Operation) {
+        title.text = operation.getTitle()
+        
+        bodyView.removeFromSuperview()
+        bodyView = operation.getView()
+        addSubview(bodyView)
+        bodyView.snp.makeConstraints{ make in
+            make.top.equalTo(title.snp.bottom)
+            make.left.right.bottom.equalToSuperview()
+        }
+    }
+
 
 }

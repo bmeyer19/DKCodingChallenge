@@ -12,7 +12,6 @@ class OperationViewLayout: UICollectionViewFlowLayout {
     
     override init() {
         super.init()
-        
         self.scrollDirection = .horizontal
     }
     
