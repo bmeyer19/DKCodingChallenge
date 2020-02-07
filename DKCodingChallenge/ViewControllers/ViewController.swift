@@ -39,7 +39,7 @@ class ViewController: UIViewController {
         logo = UIImageView(image: logoImage)
         logo.contentMode = .scaleAspectFit
         view.addSubview(logo)
-            
+                    
         collectionView = OperationView(size: size)
         view.addSubview(collectionView)
         

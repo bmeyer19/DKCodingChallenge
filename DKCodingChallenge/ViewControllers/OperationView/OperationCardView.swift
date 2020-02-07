@@ -36,7 +36,6 @@ class OperationCardView: UIView {
         title = UILabel()
         title.textColor = .white
         title.numberOfLines = 2
-        title.text = "Operation"
         title.font = .systemFont(ofSize: 18, weight: .semibold)
         addSubview(title)
         

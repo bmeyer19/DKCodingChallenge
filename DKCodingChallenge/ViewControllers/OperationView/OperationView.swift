@@ -37,7 +37,6 @@ class OperationView: UIView {
     // MARK: - View Setup
     
     private func setupViews() {
-        
         collectionView = OperationCollectionView(size: size)
         collectionView.dataSource = self
         collectionView.delegate = self

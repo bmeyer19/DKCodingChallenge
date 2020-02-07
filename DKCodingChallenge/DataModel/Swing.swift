@@ -12,34 +12,18 @@ public struct Swing {
     
     // MARK: - Variables
     
-    private var timestamp : Int;
-    private var ax : Float;
-    private var ay : Float;
-    private var az : Float;
-    private var wx : Float;
-    private var wy : Float;
-    private var wz : Float;
+    private var timestamp : Int!
+    private var values : [Float]!
     
     // MARK: - Initializer
     
-    public init(_ timestamp : Int, _ ax : Float, _ ay : Float, _ az : Float, _ wx : Float, _ wy : Float, _ wz : Float) {
-        self.timestamp = timestamp
-        self.ax = ax
-        self.ay = ay
-        self.az = az
-        self.wx = wx
-        self.wy = wy
-        self.wz = wz
-    }
-    
     public init(swingArray : [Substring.SubSequence]) {
-        self.timestamp = Int(swingArray[0]) ?? 0
-        self.ax = Float(swingArray[1]) ?? 0
-        self.ay = Float(swingArray[2]) ?? 0
-        self.az = Float(swingArray[3]) ?? 0
-        self.wx = Float(swingArray[4]) ?? 0
-        self.wy = Float(swingArray[5]) ?? 0
-        self.wz = Float(swingArray[6]) ?? 0
+        timestamp = Int(swingArray[0])
+        values = []
+        for index in Range(1...6) {
+            let value = Float(swingArray[index]) ?? 0
+            values.append(value)
+        }
     }
     
     // MARK: - Methods
@@ -48,28 +32,32 @@ public struct Swing {
         return timestamp
     }
     
+    public func getValues() -> [Float] {
+        return values
+    }
+    
     public func getax() -> Float {
-        return ax
+        return values[0]
     }
     
     public func getay() -> Float {
-        return ay
+        return values[1]
     }
     
     public func getaz() -> Float {
-        return az
+        return values[2]
     }
     
     public func getwx() -> Float {
-        return wx
+        return values[3]
     }
     
     public func getwy() -> Float {
-        return wy
+        return values[4]
     }
     
     public func getwz() -> Float {
-        return wz
+        return values[5]
     }
     
 }

@@ -16,7 +16,7 @@ public class DataService {
     
     // MARK: - Functions
     
-    public func readCSV(_ filename : String){
+    public func readCSV(_ filename: String){
         let path = Bundle.main.path(forResource: filename, ofType: "csv")!
         let url = URL(fileURLWithPath: path)
         let urlContents = try! String(contentsOf: url)
@@ -26,10 +26,17 @@ public class DataService {
             let swing = Swing(swingArray: swingArray)
             swingData.append(swing)
         }
+        
+        
+        print(CodingChallenge.shared.backSearchContinuityWithinRange(data: swingData, indexBegin: 20, indexEnd: 4, thresholdLo: 2, thresholdHi: 6, winLength: 6))
     }
     
     public func printDataSummary() {
         print("# of timestamps: " + String(swingData.count))
     }
+    
 
+    
+    
+    
 }
