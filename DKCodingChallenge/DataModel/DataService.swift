@@ -12,17 +12,24 @@ public class DataService {
     
     static let shared = DataService()
     
+    private var swingData : [Swing] = []
+    
     // MARK: - Functions
     
-    public func read(_ filename : String){
+    public func readCSV(_ filename : String){
         let path = Bundle.main.path(forResource: filename, ofType: "csv")!
         let url = URL(fileURLWithPath: path)
         let urlContents = try! String(contentsOf: url)
         let rows = urlContents.split(separator: "\r\n")
         for row in rows {
-            let swing = row.split(separator: ",")
-            print(swing)
+            let swingArray = row.split(separator: ",")
+            let swing = Swing(swingArray: swingArray)
+            swingData.append(swing)
         }
+    }
+    
+    public func printDataSummary() {
+        print("# of timestamps: " + String(swingData.count))
     }
 
 }

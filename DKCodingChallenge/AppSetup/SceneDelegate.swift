@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         window?.rootViewController = ViewController()
         window?.makeKeyAndVisible()
-        DataService.shared.read("latestSwing")
+        DataService.shared.readCSV("latestSwing")
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

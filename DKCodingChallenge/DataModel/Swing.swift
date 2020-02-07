@@ -32,6 +32,16 @@ public struct Swing {
         self.wz = wz
     }
     
+    public init(swingArray : [Substring.SubSequence]) {
+        self.timestamp = Int(swingArray[0]) ?? 0
+        self.ax = Float(swingArray[1]) ?? 0
+        self.ay = Float(swingArray[2]) ?? 0
+        self.az = Float(swingArray[3]) ?? 0
+        self.wx = Float(swingArray[4]) ?? 0
+        self.wy = Float(swingArray[5]) ?? 0
+        self.wz = Float(swingArray[6]) ?? 0
+    }
+    
     // MARK: - Methods
     
     public func getTimestamp() -> Int {
