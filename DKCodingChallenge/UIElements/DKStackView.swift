@@ -12,14 +12,22 @@ class DKStackView: UIStackView {
 
     // MARK: - Initialization
 
-    init(arrangedSubviews: [UIView]) {
+    init(arrangedSubviews: [UIView], axis: NSLayoutConstraint.Axis) {
         super.init(frame: .zero)
         for view in arrangedSubviews {
             addArrangedSubview(view)
         }
-        axis = .vertical
-        alignment = .fill
-        distribution = .equalSpacing
+        self.axis = axis
+        self.alignment = .fill
+        switch axis {
+        case .vertical:
+            distribution = .equalSpacing
+        case .horizontal:
+            distribution = .fillEqually
+            spacing = 20
+
+        }
+
         
     }
     

@@ -33,10 +33,32 @@ class DKTextField: UITextField {
         switch inputType {
         case .float:
             keyboardType = .decimalPad
+            text = "0.0"
         case .int:
             keyboardType = .numberPad
+            text = "0"
         }
-        
+        keyboardAppearance = .dark
+        setupAccessoryView()
+    }
+    
+    private func setupAccessoryView() {
+        let flexible = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil)
+        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dismissKeyboard))
+        doneButton.tintColor = .DKAccent
+        let bar = UIToolbar()
+        bar.items = [flexible, doneButton]
+        bar.backgroundColor = .DKBody
+        bar.sizeToFit()
+        print(UIScreen.main.bounds.height)
+        let customView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: UIScreen.main.bounds.height))
+        customView.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        customView.addSubview(bar)
+        bar.snp.makeConstraints{ make in
+            make.bottom.left.right.equalToSuperview()
+            make.height.equalTo(44)
+        }
+        inputAccessoryView = customView
     }
     
     required init?(coder: NSCoder) {
@@ -44,6 +66,10 @@ class DKTextField: UITextField {
     }
 
     // MARK: - Functions
+    
+    @objc private func dismissKeyboard() {
+        endEditing(true)
+    }
 
     override open func textRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.inset(by: padding)

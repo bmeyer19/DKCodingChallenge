@@ -1,15 +1,15 @@
 //
-//  SCAVView.swift
+//  SCAVTSView.swift
 //  DKCodingChallenge
 //
-//  Created by Ben Meyer on 2/7/20.
+//  Created by Ben Meyer on 2/8/20.
 //  Copyright © 2020 bmeyer. All rights reserved.
 //
 
 import UIKit
 import SnapKit
 
-class SCAVView: UIView {
+class SCAVTSView: UIView {
     
     // MARK: - Variables
     
@@ -18,8 +18,10 @@ class SCAVView: UIView {
     private var indexBeginInput: UITextField!
     private var indexEndInput: UITextField!
     private var indexStack: UIStackView!
-    private var thresholdLabel: UILabel!
-    private var thresholdInput: UITextField!
+    private var thresholdLabelStack: UIStackView!
+    private var threshold1: UITextField!
+    private var threshold2: UITextField!
+    private var thresholdStack: UIStackView!
     private var winLengthLabel: UILabel!
     private var winLengthInput: UITextField!
     private var outputLabel: UILabel!
@@ -55,8 +57,15 @@ class SCAVView: UIView {
         let indexInputs : [UIView] = [indexBeginInput, indexEndInput]
         indexStack = DKStackView(arrangedSubviews: indexInputs, axis: .horizontal)
         
-        thresholdLabel = DKLabelSmall(text: "threshold")
-        thresholdInput = DKTextField(inputType: .float)
+        let threshold1Label = DKLabelSmall(text: "threshold1")
+        let threshold2Label = DKLabelSmall(text: "threshold2")
+        let thresholdLabels: [UIView] = [threshold1Label, threshold2Label]
+        thresholdLabelStack = DKStackView(arrangedSubviews: thresholdLabels, axis: .horizontal)
+        
+        threshold1 = DKTextField(inputType: .float)
+        threshold2 = DKTextField(inputType: .float)
+        let thresholdInputs: [UIView] = [threshold1, threshold2]
+        thresholdStack = DKStackView(arrangedSubviews: thresholdInputs, axis: .horizontal)
         
         winLengthLabel = DKLabelSmall(text: "winLength")
         winLengthInput = DKTextField(inputType: .int)
@@ -64,7 +73,7 @@ class SCAVView: UIView {
         outputLabel = DKLabelSmall(text: "Output")
         outputView = DKTextView()
         
-        let inputViews : [UIView] = [indexLabelStack, indexStack, thresholdLabel, thresholdInput, winLengthLabel, winLengthInput, outputLabel, outputView]
+        let inputViews : [UIView] = [indexLabelStack, indexStack, thresholdLabelStack, thresholdStack, winLengthLabel, winLengthInput, outputLabel, outputView]
         stack = DKStackView(arrangedSubviews: inputViews, axis: .vertical)
         addSubview(stack)
         
@@ -79,13 +88,13 @@ class SCAVView: UIView {
         }
         indexLabelStack.snp.makeConstraints{ make in
             make.height.equalTo(25)
-            make.height.equalTo(thresholdLabel.snp.height)
+            make.height.equalTo(thresholdLabelStack.snp.height)
             make.height.equalTo(winLengthLabel.snp.height)
             make.height.equalTo(outputLabel.snp.height)
         }
         indexStack.snp.makeConstraints{ make in
             make.height.equalTo(40)
-            make.height.equalTo(thresholdInput.snp.height)
+            make.height.equalTo(thresholdStack.snp.height)
             make.height.equalTo(winLengthInput.snp.height)
             make.height.equalTo(outputView.snp.height)
         }
@@ -99,13 +108,13 @@ class SCAVView: UIView {
     
     @objc private func buttonPressed() {
         let data = DataService.shared.getSwingData()
-        print(Int(indexBeginInput.text ?? "0") ?? 0)
-        print(Int(indexEndInput.text ?? "0") ?? 0)
-        let result = CodingChallenge.shared.searchContinuityAboveValue(
-            data: data,
+        let result = CodingChallenge.shared.searchContinuityAboveValueTwoSignals(
+            data1: data,
+            data2: data,
             indexBegin: Int(indexBeginInput.text ?? "0") ?? 0,
             indexEnd: Int(indexEndInput.text ?? "0") ?? 0,
-            threshold: Float(thresholdInput.text ?? "0") ?? 0,
+            threshold1: Float(threshold1.text ?? "0") ?? 0,
+            threshold2: Float(threshold2.text ?? "0") ?? 0,
             winLength: Int(winLengthInput.text ?? "0") ?? 0)
         if let output = result {
             outputView.text = String(output)
@@ -113,7 +122,8 @@ class SCAVView: UIView {
             outputView.text = "none"
         }
         outputView.flash(color: .DKAccent)
-        
     }
     
 }
+
+

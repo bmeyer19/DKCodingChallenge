@@ -23,6 +23,16 @@ class TestCardView: UIView {
         super.init(frame: .zero)
         applyShadow(color: .black)
         setupViews()
+        
+        NotificationCenter.default.addObserver(self,
+        selector: #selector(handle(keyboardShowNotification:)),
+        name: UIResponder.keyboardWillShowNotification,
+        object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+        selector: #selector(handleHide(keyboardShowNotification:)),
+        name: UIResponder.keyboardWillHideNotification,
+        object: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -62,7 +72,7 @@ class TestCardView: UIView {
         }
         body.snp.makeConstraints{ make in
             make.left.right.bottom.equalToSuperview()
-            make.top.equalTo(backButton.snp.bottom).offset(10)
+            make.top.equalTo(backButton.snp.bottom)
         }
     }
     
@@ -74,6 +84,12 @@ class TestCardView: UIView {
         switch operation {
         case .searchContinuityAboveValue:
             setupTestView(view: SCAVView())
+        case .backSearchContinuityWithinRange:
+            setupTestView(view: BSCWRView())
+        case .searchContinuityAboveValueTwoSignals:
+            setupTestView(view: SCAVTSView())
+        case .searchMultiContinuityWithinRange:
+            setupTestView(view: SMCWRView())
         default:
             print("none")
         }
@@ -84,6 +100,20 @@ class TestCardView: UIView {
         view.snp.makeConstraints{ make in
             make.edges.equalToSuperview()
         }
+    }
+    
+    @objc private func handle(keyboardShowNotification notification: Notification) {
+        /*let distance = UIScreen.main.bounds.height - (UIScreen.main.bounds.height * 0.6 + 120)
+        UIView.animate(withDuration: 1, animations:{
+            self.frame.origin = CGPoint(x: self.frame.origin.x, y: self.frame.origin.y - distance)
+        })*/
+    }
+    
+    @objc private func handleHide(keyboardShowNotification notification: Notification) {
+        /*let distance = UIScreen.main.bounds.height - (UIScreen.main.bounds.height * 0.6 + 120)
+        UIView.animate(withDuration: 1, animations:{
+            self.frame.origin = CGPoint(x: self.frame.origin.x, y: self.frame.origin.y + distance)
+        })*/
     }
 
 

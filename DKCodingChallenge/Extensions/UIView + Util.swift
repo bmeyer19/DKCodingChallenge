@@ -16,4 +16,14 @@ extension UIView {
         self.layer.shadowOpacity = 0.2
     }
     
+    public func flash(color: UIColor) {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.backgroundColor = color.withAlphaComponent(0.5)
+        }, completion: { (finished: Bool) -> Void in
+            UIView.animate(withDuration: 0.5, animations: {
+                self.backgroundColor = .DKBodyLight
+            })
+        })
+    }
+    
 }
