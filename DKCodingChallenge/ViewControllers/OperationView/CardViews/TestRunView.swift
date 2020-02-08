@@ -50,8 +50,8 @@ class TestRunView: UIView {
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         addSubview(button)
         
-        let indexBeginLabel = DKLabelSmall(text: "indexBegin")
-        let indexEndLabel = DKLabelSmall(text: "indexEnd")
+        let indexBeginLabel = DKLabelSmall(text: "Index Begin")
+        let indexEndLabel = DKLabelSmall(text: "Index End")
         let indexLabels : [UILabel] = [indexBeginLabel, indexEndLabel]
         indexLabelStack = DKStackView(arrangedSubviews: indexLabels, axis: .horizontal)
         
@@ -60,8 +60,8 @@ class TestRunView: UIView {
         let indexInputs : [UIView] = [indexBeginInput, indexEndInput]
         indexStack = DKStackView(arrangedSubviews: indexInputs, axis: .horizontal)
         
-        let threshold1Label = DKLabelSmall(text: "thresholdLo")
-        let threshold2Label = DKLabelSmall(text: "thresholdHi")
+        let threshold1Label = DKLabelSmall(text: "Threshold Lo")
+        let threshold2Label = DKLabelSmall(text: "Threshold Hi")
         threshold1 = DKTextField(inputType: .float)
         threshold2 = DKTextField(inputType: .float)
         let thresholdLabels: [UIView]!
@@ -70,12 +70,12 @@ class TestRunView: UIView {
         case .searchContinuityAboveValue:
              thresholdLabels = [threshold1Label]
              thresholdInputs = [threshold1]
-             threshold1Label.text = "threshold"
+             threshold1Label.text = "Threshold"
         case .searchContinuityAboveValueTwoSignals:
             thresholdLabels = [threshold1Label, threshold2Label]
             thresholdInputs = [threshold1, threshold2]
-            threshold1Label.text = "threshold1"
-            threshold2Label.text = "threshold2"
+            threshold1Label.text = "Threshold 1"
+            threshold2Label.text = "Threshold 2"
         default:
             thresholdLabels = [threshold1Label, threshold2Label]
             thresholdInputs = [threshold1, threshold2]
@@ -83,7 +83,7 @@ class TestRunView: UIView {
         thresholdLabelStack = DKStackView(arrangedSubviews: thresholdLabels, axis: .horizontal)
         thresholdStack = DKStackView(arrangedSubviews: thresholdInputs, axis: .horizontal)
         
-        winLengthLabel = DKLabelSmall(text: "winLength")
+        winLengthLabel = DKLabelSmall(text: "Win Length")
         winLengthInput = DKTextField(inputType: .int)
         
         outputLabel = DKLabelSmall(text: "Output")
@@ -123,6 +123,27 @@ class TestRunView: UIView {
     // MARK: - User Interactions
     
     @objc private func buttonPressed() {
+        let indexBegin = Int(indexBeginInput.text ?? "0") ?? 0
+        let indexEnd = Int(indexEndInput.text ?? "0") ?? 0
+        switch operation {
+        case .backSearchContinuityWithinRange:
+            if indexEnd > indexBegin {
+                indexEndInput.flash(color: .systemRed)
+            } else {
+                testOperation()
+            }
+        default:
+            if indexEnd < indexBegin {
+                indexBeginInput.flash(color: .systemRed)
+            } else {
+                testOperation()
+            }
+        }
+    }
+    
+    // MARK: - Functions
+    
+    private func testOperation() {
         let data = DataService.shared.getSwingData()
         let indexBegin = Int(indexBeginInput.text ?? "0") ?? 0
         let indexEnd = Int(indexEndInput.text ?? "0") ?? 0

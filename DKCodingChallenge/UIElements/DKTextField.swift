@@ -30,6 +30,12 @@ class DKTextField: UITextField {
         placeholder = String(0)
         delegate = self
         tintColor = .DKAccent
+        setupKeyboard(inputType: inputType)
+        setupAccessoryView()
+    }
+    
+    private func setupKeyboard(inputType: InputType) {
+        keyboardAppearance = .dark
         switch inputType {
         case .float:
             keyboardType = .decimalPad
@@ -38,11 +44,13 @@ class DKTextField: UITextField {
             keyboardType = .numberPad
             text = "0"
         }
-        keyboardAppearance = .dark
-        setupAccessoryView()
     }
     
     private func setupAccessoryView() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        let customView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: UIScreen.main.bounds.height))
+        customView.addGestureRecognizer(tapGesture)
+        
         let flexible = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil)
         let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dismissKeyboard))
         doneButton.tintColor = .DKAccent
@@ -50,9 +58,6 @@ class DKTextField: UITextField {
         bar.items = [flexible, doneButton]
         bar.backgroundColor = .DKBody
         bar.sizeToFit()
-        print(UIScreen.main.bounds.height)
-        let customView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: UIScreen.main.bounds.height))
-        customView.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         customView.addSubview(bar)
         bar.snp.makeConstraints{ make in
             make.bottom.left.right.equalToSuperview()
