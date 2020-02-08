@@ -16,8 +16,8 @@ class ViewController: UIViewController {
     private var logo: UIImageView!
     private var collectionView : OperationView!
     
-    private let heightMultiplier : CGFloat = 0.6
-    private let verticalInset : CGFloat = 60
+    private let heightMultiplier : CGFloat = 0.625
+    private let verticalInset : CGFloat = 55
     
     // MARK: - Lifecycle
 

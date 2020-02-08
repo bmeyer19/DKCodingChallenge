@@ -19,16 +19,13 @@
 		4A99F2F323ECF3F90046001D /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99F2F223ECF3F90046001D /* Operation.swift */; };
 		4A99F2F523ED3CE90046001D /* CodingChallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99F2F423ED3CE90046001D /* CodingChallenge.swift */; };
 		4A99F2F723EDF6640046001D /* TestCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99F2F623EDF6640046001D /* TestCardView.swift */; };
-		4A99F2FC23EE05210046001D /* SCAVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99F2FB23EE05210046001D /* SCAVView.swift */; };
 		4A99F2FE23EE06240046001D /* DKButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99F2FD23EE06240046001D /* DKButton.swift */; };
 		4A99F30023EE07030046001D /* DKTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99F2FF23EE07030046001D /* DKTextView.swift */; };
 		4A99F30223EE07920046001D /* DKLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99F30123EE07920046001D /* DKLabel.swift */; };
 		4A99F30523EE28530046001D /* DKTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99F30423EE28530046001D /* DKTextField.swift */; };
 		4A99F30723EE2E7D0046001D /* DKStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99F30623EE2E7D0046001D /* DKStackView.swift */; };
 		4A99F30923EEBECA0046001D /* DKLabelSmall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99F30823EEBECA0046001D /* DKLabelSmall.swift */; };
-		4A99F30B23EEC93B0046001D /* BSCWRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99F30A23EEC93B0046001D /* BSCWRView.swift */; };
-		4A99F30D23EECD5D0046001D /* SCAVTSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99F30C23EECD5D0046001D /* SCAVTSView.swift */; };
-		4A99F30F23EECEB60046001D /* SMCWRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99F30E23EECEB60046001D /* SMCWRView.swift */; };
+		4A99F31123EED4B40046001D /* TestRunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99F31023EED4B40046001D /* TestRunView.swift */; };
 		4AA5987623E906DB001DD4AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5987523E906DB001DD4AA /* AppDelegate.swift */; };
 		4AA5987A23E906DB001DD4AA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5987923E906DB001DD4AA /* ViewController.swift */; };
 		4AA5987F23E906DC001DD4AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AA5987E23E906DC001DD4AA /* Assets.xcassets */; };
@@ -50,16 +47,13 @@
 		4A99F2F223ECF3F90046001D /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
 		4A99F2F423ED3CE90046001D /* CodingChallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodingChallenge.swift; sourceTree = "<group>"; };
 		4A99F2F623EDF6640046001D /* TestCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCardView.swift; sourceTree = "<group>"; };
-		4A99F2FB23EE05210046001D /* SCAVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCAVView.swift; sourceTree = "<group>"; };
 		4A99F2FD23EE06240046001D /* DKButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DKButton.swift; sourceTree = "<group>"; };
 		4A99F2FF23EE07030046001D /* DKTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DKTextView.swift; sourceTree = "<group>"; };
 		4A99F30123EE07920046001D /* DKLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DKLabel.swift; sourceTree = "<group>"; };
 		4A99F30423EE28530046001D /* DKTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DKTextField.swift; sourceTree = "<group>"; };
 		4A99F30623EE2E7D0046001D /* DKStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DKStackView.swift; sourceTree = "<group>"; };
 		4A99F30823EEBECA0046001D /* DKLabelSmall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DKLabelSmall.swift; sourceTree = "<group>"; };
-		4A99F30A23EEC93B0046001D /* BSCWRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSCWRView.swift; sourceTree = "<group>"; };
-		4A99F30C23EECD5D0046001D /* SCAVTSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCAVTSView.swift; sourceTree = "<group>"; };
-		4A99F30E23EECEB60046001D /* SMCWRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMCWRView.swift; sourceTree = "<group>"; };
+		4A99F31023EED4B40046001D /* TestRunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRunView.swift; sourceTree = "<group>"; };
 		4AA5987223E906DB001DD4AA /* DKCodingChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DKCodingChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AA5987523E906DB001DD4AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4AA5987923E906DB001DD4AA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -129,10 +123,7 @@
 			children = (
 				4A99F2EF23ECE8970046001D /* OperationCardView.swift */,
 				4A99F2F623EDF6640046001D /* TestCardView.swift */,
-				4A99F2FB23EE05210046001D /* SCAVView.swift */,
-				4A99F30A23EEC93B0046001D /* BSCWRView.swift */,
-				4A99F30C23EECD5D0046001D /* SCAVTSView.swift */,
-				4A99F30E23EECEB60046001D /* SMCWRView.swift */,
+				4A99F31023EED4B40046001D /* TestRunView.swift */,
 			);
 			path = CardViews;
 			sourceTree = "<group>";
@@ -337,9 +328,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A24FABE23E90C900031E9B9 /* SceneDelegate.swift in Sources */,
-				4A99F2FC23EE05210046001D /* SCAVView.swift in Sources */,
-				4A99F30D23EECD5D0046001D /* SCAVTSView.swift in Sources */,
-				4A99F30F23EECEB60046001D /* SMCWRView.swift in Sources */,
+				4A99F31123EED4B40046001D /* TestRunView.swift in Sources */,
 				4A99F30023EE07030046001D /* DKTextView.swift in Sources */,
 				4A99F2EE23ECD8AF0046001D /* OperationCollectionView.swift in Sources */,
 				4A99F30523EE28530046001D /* DKTextField.swift in Sources */,
@@ -356,7 +345,6 @@
 				4A99F2FE23EE06240046001D /* DKButton.swift in Sources */,
 				4A99F2F323ECF3F90046001D /* Operation.swift in Sources */,
 				4A99F2F523ED3CE90046001D /* CodingChallenge.swift in Sources */,
-				4A99F30B23EEC93B0046001D /* BSCWRView.swift in Sources */,
 				4A99F30223EE07920046001D /* DKLabel.swift in Sources */,
 				4A99F2EA23ECD48E0046001D /* OperationViewCell.swift in Sources */,
 				4A99F2E123ECCA170046001D /* UIColor + Util.swift in Sources */,

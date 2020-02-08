@@ -1,5 +1,5 @@
 //
-//  SCAVTSView.swift
+//  TestRunView.swift
 //  DKCodingChallenge
 //
 //  Created by Ben Meyer on 2/8/20.
@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class SCAVTSView: UIView {
+class TestRunView: UIView {
     
     // MARK: - Variables
     
@@ -28,10 +28,13 @@ class SCAVTSView: UIView {
     private var outputView: UITextView!
     private var stack: UIStackView!
     
+    private var operation: Operation!
+    
     // MARK: - Initialization
     
-    init() {
+    init(operation: Operation) {
         super.init(frame: .zero)
+        self.operation = operation
         setupViews()
     }
     
@@ -57,14 +60,27 @@ class SCAVTSView: UIView {
         let indexInputs : [UIView] = [indexBeginInput, indexEndInput]
         indexStack = DKStackView(arrangedSubviews: indexInputs, axis: .horizontal)
         
-        let threshold1Label = DKLabelSmall(text: "threshold1")
-        let threshold2Label = DKLabelSmall(text: "threshold2")
-        let thresholdLabels: [UIView] = [threshold1Label, threshold2Label]
-        thresholdLabelStack = DKStackView(arrangedSubviews: thresholdLabels, axis: .horizontal)
-        
+        let threshold1Label = DKLabelSmall(text: "thresholdLo")
+        let threshold2Label = DKLabelSmall(text: "thresholdHi")
         threshold1 = DKTextField(inputType: .float)
         threshold2 = DKTextField(inputType: .float)
-        let thresholdInputs: [UIView] = [threshold1, threshold2]
+        let thresholdLabels: [UIView]!
+        let thresholdInputs: [UIView]!
+        switch operation {
+        case .searchContinuityAboveValue:
+             thresholdLabels = [threshold1Label]
+             thresholdInputs = [threshold1]
+             threshold1Label.text = "threshold"
+        case .searchContinuityAboveValueTwoSignals:
+            thresholdLabels = [threshold1Label, threshold2Label]
+            thresholdInputs = [threshold1, threshold2]
+            threshold1Label.text = "threshold1"
+            threshold2Label.text = "threshold2"
+        default:
+            thresholdLabels = [threshold1Label, threshold2Label]
+            thresholdInputs = [threshold1, threshold2]
+        }
+        thresholdLabelStack = DKStackView(arrangedSubviews: thresholdLabels, axis: .horizontal)
         thresholdStack = DKStackView(arrangedSubviews: thresholdInputs, axis: .horizontal)
         
         winLengthLabel = DKLabelSmall(text: "winLength")
@@ -108,20 +124,66 @@ class SCAVTSView: UIView {
     
     @objc private func buttonPressed() {
         let data = DataService.shared.getSwingData()
-        let result = CodingChallenge.shared.searchContinuityAboveValueTwoSignals(
-            data1: data,
-            data2: data,
-            indexBegin: Int(indexBeginInput.text ?? "0") ?? 0,
-            indexEnd: Int(indexEndInput.text ?? "0") ?? 0,
-            threshold1: Float(threshold1.text ?? "0") ?? 0,
-            threshold2: Float(threshold2.text ?? "0") ?? 0,
-            winLength: Int(winLengthInput.text ?? "0") ?? 0)
-        if let output = result {
-            outputView.text = String(output)
-        } else {
-            outputView.text = "none"
+        let indexBegin = Int(indexBeginInput.text ?? "0") ?? 0
+        let indexEnd = Int(indexEndInput.text ?? "0") ?? 0
+        let threshold1Value = Float(threshold1.text ?? "0") ?? 0
+        let threshold2Value = Float(threshold2.text ?? "0") ?? 0
+        let winLength = Int(winLengthInput.text ?? "0") ?? 0
+        
+        switch operation {
+        case .searchContinuityAboveValue:
+            let result = CodingChallenge.shared.searchContinuityAboveValue(
+                data: data,
+                indexBegin: indexBegin,
+                indexEnd: indexEnd,
+                threshold: threshold1Value,
+                winLength: winLength)
+            if let output = result {
+                outputView.text = String(output)
+            } else {
+                outputView.text = "none"
+            }
+        case .backSearchContinuityWithinRange:
+            let result = CodingChallenge.shared.backSearchContinuityWithinRange(
+                data: data,
+                indexBegin: indexBegin,
+                indexEnd: indexEnd,
+                thresholdLo: threshold1Value,
+                thresholdHi: threshold2Value,
+                winLength: winLength)
+            if let output = result {
+                outputView.text = String(output)
+            } else {
+                outputView.text = "none"
+            }
+        case .searchContinuityAboveValueTwoSignals:
+            let result = CodingChallenge.shared.searchContinuityAboveValueTwoSignals(
+                data1: data,
+                data2: data,
+                indexBegin: indexBegin,
+                indexEnd: indexEnd,
+                threshold1: threshold1Value,
+                threshold2: threshold2Value,
+                winLength: winLength)
+            if let output = result {
+                outputView.text = String(output)
+            } else {
+                outputView.text = "none"
+            }
+        case .searchMultiContinuityWithinRange:
+            let result = CodingChallenge.shared.searchMultiContinuityWithinRange(
+                data: data,
+                indexBegin: indexBegin,
+                indexEnd: indexEnd,
+                thresholdLo: threshold1Value,
+                thresholdHi: threshold2Value,
+                winLength: winLength)
+            outputView.text = result.description
+        default:
+            print("No Operation Selected")
         }
-        outputView.flash(color: .DKAccent)
+        
+        outputView.flash(color: .systemTeal)
     }
     
 }

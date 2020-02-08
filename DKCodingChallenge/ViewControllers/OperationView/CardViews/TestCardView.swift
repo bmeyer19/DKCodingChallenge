@@ -81,6 +81,8 @@ class TestCardView: UIView {
     // MARK: - Functions
     
     public func configure(operation: Operation) {
+        setupTestView(view: TestRunView(operation: operation))
+        /*
         switch operation {
         case .searchContinuityAboveValue:
             setupTestView(view: SCAVView())
@@ -92,7 +94,7 @@ class TestCardView: UIView {
             setupTestView(view: SMCWRView())
         default:
             print("none")
-        }
+        }*/
     }
     
     private func setupTestView(view: UIView) {
