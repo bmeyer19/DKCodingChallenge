@@ -34,6 +34,10 @@ public class DataService {
         print("# of timestamps: " + String(swingData.count))
     }
     
+    public func getSwingData() -> [Swing] {
+        return swingData
+    }
+    
 
     
     

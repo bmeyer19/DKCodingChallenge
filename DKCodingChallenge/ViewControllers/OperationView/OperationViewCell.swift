@@ -22,6 +22,7 @@ class OperationViewCell: UICollectionViewCell {
     private var testView: TestCardView!
     private var operation: Operation!
     private var displayMode: DisplayMode!
+    private var cardOrigin: CGPoint!
     
     // MARK: - Initialization
     
@@ -41,6 +42,7 @@ class OperationViewCell: UICollectionViewCell {
         cardView = OperationCardView()
         cardView.isHidden = true
         addSubview(cardView)
+        
         
         testView = TestCardView()
         testView.isHidden = true
@@ -79,6 +81,7 @@ class OperationViewCell: UICollectionViewCell {
     // MARK: - User Interactions
     
     @objc private func toggleCards() {
+        dismissKeyboard()
         switch displayMode {
         case .operation:
             presentTestCardView()
@@ -95,28 +98,38 @@ class OperationViewCell: UICollectionViewCell {
         bringSubviewToFront(testView)
         cardView.isHidden = false
         cardView.alpha = 0
+        let origin = self.testView.frame.origin
         UIView.animate(withDuration: 1, animations: {
             self.testView.frame.origin = CGPoint(x: self.testView.frame.origin.x, y: self.testView.frame.origin.y + 600)
             self.cardView.alpha = 1
         }, completion:{ (finished: Bool) -> Void in
             self.testView.isHidden = true
             self.testView.frame.origin = CGPoint(x: self.testView.frame.origin.x, y: self.testView.frame.origin.y - 600)
+            self.testView.frame.origin = origin
         })
+        
     }
     
     private func presentTestCardView() {
         bringSubviewToFront(testView)
         testView.isHidden = false
         testView.alpha = 1
+        let origin = self.testView.frame.origin
         testView.frame.origin = CGPoint(x: self.testView.frame.origin.x, y: self.testView.frame.origin.y + 600)
         UIView.animate(withDuration: 1, animations: {
             self.testView.frame.origin = CGPoint(x: self.testView.frame.origin.x, y: self.testView.frame.origin.y - 600)
             self.cardView.alpha = 0
         }, completion:{ (finished: Bool) -> Void in
             self.cardView.isHidden = true
+            self.testView.frame.origin = origin
         })
+        
     }
     
+    private func dismissKeyboard() {
+        print("dismiss")
+        endEditing(true)
+    }
 
 
 

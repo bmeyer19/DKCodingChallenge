@@ -19,6 +19,7 @@ class DKTextView: UITextView {
         font = UIFont.init(name: "Gill Sans", size: 16)
         layer.cornerRadius = 5
         textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10);
+        isEditable = false
     }
     
     required init?(coder: NSCoder) {

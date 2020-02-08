@@ -82,7 +82,7 @@ class TestCardView: UIView {
     private func setupTestView(view: UIView) {
         body.addSubview(view)
         view.snp.makeConstraints{ make in
-            make.edges.equalToSuperview().inset(30)
+            make.edges.equalToSuperview()
         }
     }
 
