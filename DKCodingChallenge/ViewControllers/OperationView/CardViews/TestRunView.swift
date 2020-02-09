@@ -114,6 +114,7 @@ class TestRunView: UIView {
         outputView = DKTextView()
     
         scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
         addSubview(scrollView)
         
         let inputViews: [UIView]!
@@ -166,7 +167,7 @@ class TestRunView: UIView {
         switch operation {
         case .searchMultiContinuityWithinRange:
             outputView.snp.makeConstraints{ make in
-                make.height.equalTo(100)
+                make.height.equalTo(200)
             }
         default:
             outputView.snp.makeConstraints{ make in
