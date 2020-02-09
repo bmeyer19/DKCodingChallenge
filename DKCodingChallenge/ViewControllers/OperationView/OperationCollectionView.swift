@@ -19,10 +19,8 @@ class OperationCollectionView: UICollectionView {
     init(size: CGSize) {
         let cellWidth = size.width - inset * 2
         let cellHeight = size.height - 20
-        
-        let layout = OperationViewLayout()
+        let layout = OperationCollectionViewLayout()
         layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
-        
         super.init(frame: .zero, collectionViewLayout: layout)
         
         self.backgroundColor = .clear

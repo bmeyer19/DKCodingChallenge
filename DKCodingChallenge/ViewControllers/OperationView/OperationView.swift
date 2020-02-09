@@ -40,7 +40,7 @@ class OperationView: UIView {
         collectionView = OperationCollectionView(size: size)
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(OperationViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(OperationCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         addSubview(collectionView)
         
         setupConstraints()
@@ -64,7 +64,7 @@ extension OperationView : UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell : OperationViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! OperationViewCell
+        let cell : OperationCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! OperationCollectionViewCell
         let operation = operations[indexPath.row]
         cell.configure(operation: operation)
         return cell

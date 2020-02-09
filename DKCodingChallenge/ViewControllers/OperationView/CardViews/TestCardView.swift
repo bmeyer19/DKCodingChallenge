@@ -8,6 +8,8 @@
 
 import UIKit
 
+// Card in the Operation Collection View
+// Lets users toggle parameters and run tests of the various algorithms
 class TestCardView: UIView {
     
     // MARK: - Variables
@@ -68,16 +70,18 @@ class TestCardView: UIView {
     
     // MARK: - Functions
     
+    // resets all current views and adds a parameter view
     public func configure(operation: Operation) {
         for view in subviews {
             view.removeFromSuperview()
         }
         setupViews()
         setupConstraints()
-        setupTestView(view: TestRunView(operation: operation))
+        setupParameterView(view: ParameterView(operation: operation))
     }
     
-    private func setupTestView(view: UIView) {
+    // adds a parameter view to the body of the card
+    private func setupParameterView(view: UIView) {
         body.addSubview(view)
         view.snp.makeConstraints{ make in
             make.edges.equalToSuperview()

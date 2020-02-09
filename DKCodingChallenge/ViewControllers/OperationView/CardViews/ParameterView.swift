@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class TestRunView: UIView {
+class ParameterView: UIView {
     
     // MARK: - Variables
     
@@ -79,9 +79,16 @@ class TestRunView: UIView {
         
         indexBeginInput = DKTextField(inputType: .int)
         indexEndInput = DKTextField(inputType: .int)
-        indexEndInput.text = String(DataService.shared.getSwingData().count - 1)
         let indexInputs : [UIView] = [indexBeginInput, indexEndInput]
         indexStack = DKStackView(arrangedSubviews: indexInputs, axis: .horizontal)
+        
+        let maxIndex = DataService.shared.getSwingData().count - 1
+        switch operation {
+        case .backSearchContinuityWithinRange:
+            indexBeginInput.text = String(maxIndex)
+        default:
+            indexEndInput.text = String(maxIndex)
+        }
         
         let threshold1Label = DKLabelSmall(text: "Threshold Lo")
         let threshold2Label = DKLabelSmall(text: "Threshold Hi")
@@ -162,7 +169,7 @@ class TestRunView: UIView {
                 make.height.equalTo(40)
             }
         default:
-            print("only one dataset")
+            ()
         }
         switch operation {
         case .searchMultiContinuityWithinRange:
@@ -186,14 +193,24 @@ class TestRunView: UIView {
         if inputIsValid() {
             testOperation()
         }
+        switch operation {
+        case .searchMultiContinuityWithinRange:
+            scrollToBottom()
+        case .searchContinuityAboveValueTwoSignals:
+            scrollToBottom()
+        default:
+            ()
+        }
+        
     }
     
     // MARK: - Functions
     
     private func testOperation() {
         let column = columns[dataControl.selectedSegmentIndex]
+        let column2 = columns[dataControl2.selectedSegmentIndex]
         let data = DataService.shared.getColumn(column: column)
-        let data2 = DataService.shared.getColumn(column: column)
+        let data2 = DataService.shared.getColumn(column: column2)
         let indexBegin = Int(indexBeginInput.text ?? "0") ?? 0
         let indexEnd = Int(indexEndInput.text ?? "0") ?? 0
         let threshold1Value = Float(threshold1.text ?? "0") ?? 0
@@ -210,7 +227,7 @@ class TestRunView: UIView {
             if let output = result {
                 outputView.text = String(output)
             } else {
-                outputView.text = "No Such Continuity Found"
+                outputView.text = "No Continuity Found"
             }
         case .backSearchContinuityWithinRange:
             let result = CodingChallenge.shared.backSearchContinuityWithinRange(
@@ -223,7 +240,7 @@ class TestRunView: UIView {
             if let output = result {
                 outputView.text = String(output)
             } else {
-                outputView.text = "No Such Continuity Found"
+                outputView.text = "No Continuity Found"
             }
         case .searchContinuityAboveValueTwoSignals:
             let result = CodingChallenge.shared.searchContinuityAboveValueTwoSignals(
@@ -237,7 +254,7 @@ class TestRunView: UIView {
             if let output = result {
                 outputView.text = String(output)
             } else {
-                outputView.text = "No Such Continuity Found"
+                outputView.text = "No Continuity Found"
             }
         case .searchMultiContinuityWithinRange:
             let result = CodingChallenge.shared.searchMultiContinuityWithinRange(
@@ -298,6 +315,11 @@ class TestRunView: UIView {
             outputView.text = "Index out of range"
         }
         return false
+    }
+    
+    private func scrollToBottom() {
+        let bottomOffset: CGPoint = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.size.height + self.scrollView.contentInset.bottom);
+        scrollView.setContentOffset(bottomOffset, animated: true)
     }
     
 }

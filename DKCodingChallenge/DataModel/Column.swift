@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Different features of the swing data
 public enum Column {
     case ax
     case ay

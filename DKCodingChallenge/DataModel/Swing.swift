@@ -8,6 +8,7 @@
 
 import Foundation
 
+//
 public struct Swing {
     
     // MARK: - Variables
@@ -22,6 +23,7 @@ public struct Swing {
     
     // MARK: - Initializer
     
+    // Creates the object from a row of a CSV file
     public init(swingArray : [Substring.SubSequence]) {
         timestamp = Int(swingArray[0])
         ax = Float(swingArray[1])

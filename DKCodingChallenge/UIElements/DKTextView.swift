@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Reusable view for displaying text.
 class DKTextView: UITextView {
 
     // MARK: - Initialization

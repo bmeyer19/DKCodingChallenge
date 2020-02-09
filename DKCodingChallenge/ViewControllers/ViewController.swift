@@ -78,6 +78,10 @@ class ViewController: UIViewController {
         }
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     // MARK: - User Interactions
     
     // MARK: - Functions

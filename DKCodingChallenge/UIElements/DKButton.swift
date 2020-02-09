@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Reusable button
 class DKButton: UIButton {
     
     // MARK: - Initialization

@@ -8,6 +8,8 @@
 
 import UIKit
 
+// Card in Operation Collection View Cell
+// Displays the name and description of the operation
 class OperationCardView: UIView {
     
     // MARK: - Variables
@@ -65,8 +67,6 @@ class OperationCardView: UIView {
             make.height.equalTo(45)
         }
     }
-    
-
     
     // MARK: - Functions
     

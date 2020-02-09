@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Shared workspace for retrieving data
 public class DataService {
     
     static let shared = DataService()

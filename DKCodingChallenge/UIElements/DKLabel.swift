@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Reusable main label
 class DKLabel: UILabel {
 
     // MARK: - Initialization

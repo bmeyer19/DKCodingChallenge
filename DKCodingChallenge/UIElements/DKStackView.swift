@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Reusable stack view. Can be set to vertical or horizontal
 class DKStackView: UIStackView {
 
     // MARK: - Initialization
@@ -26,6 +27,8 @@ class DKStackView: UIStackView {
         case .horizontal:
             distribution = .fillEqually
             spacing = 20
+        @unknown default:
+            ()
         }
     }
     

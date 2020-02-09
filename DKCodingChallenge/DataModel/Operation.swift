@@ -8,12 +8,12 @@
 
 import UIKit
 
+// The 4 coding challenge operations, their titles, and their descriptions
 public enum Operation {
     case searchContinuityAboveValue
     case backSearchContinuityWithinRange
     case searchContinuityAboveValueTwoSignals
     case searchMultiContinuityWithinRange
-    case none
     
     public func getTitle() -> String {
         switch self {
@@ -25,8 +25,6 @@ public enum Operation {
             return "Search Continuity Above Value Two Signals"
         case .searchMultiContinuityWithinRange:
             return "Search Multi Continuity Within Range"
-        default:
-            return "None"
         }
     }
     
@@ -40,8 +38,6 @@ public enum Operation {
             return "From indexBegin to indexEnd, search data1 for values that are higher than threshold1 and also search data2 for values that are higher than threshold2. Return the first index where both data1 and data2 have values that meet these criteria for at least winLength samples in a row."
         case .searchMultiContinuityWithinRange:
             return "From indexBegin to indexEnd, search data for values that are higher than thresholdLo and lower than thresholdHi. Return the the starting index and ending index of all continuous samples that meet this criteria for at least winLength data points."
-        default:
-            return "None"
         }
     }
     

@@ -8,7 +8,10 @@
 
 import UIKit
 
+// Reusable small label for input fields
 class DKLabelSmall: UILabel {
+    
+    // MARK: - Initialization
 
     init(text: String) {
         super.init(frame: .zero)
