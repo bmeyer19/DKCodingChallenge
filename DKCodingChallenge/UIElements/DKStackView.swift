@@ -25,10 +25,7 @@ class DKStackView: UIStackView {
         case .horizontal:
             distribution = .fillEqually
             spacing = 20
-
         }
-
-        
     }
     
     required init(coder: NSCoder) {

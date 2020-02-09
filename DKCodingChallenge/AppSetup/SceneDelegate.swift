@@ -20,6 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
+        window?.backgroundColor = .DKBackground
         window?.rootViewController = ViewController()
         window?.makeKeyAndVisible()
         DataService.shared.readCSV("latestSwing")

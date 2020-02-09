@@ -26,16 +26,19 @@ public class DataService {
             let swing = Swing(swingArray: swingArray)
             swingData.append(swing)
         }
-        
-        print(CodingChallenge.shared.searchMultiContinuityWithinRange(data: swingData, indexBegin: 0, indexEnd: 1000, thresholdLo: 6, thresholdHi: 9, winLength: 10))
-    }
-    
-    public func printDataSummary() {
-        print("# of timestamps: " + String(swingData.count))
     }
     
     public func getSwingData() -> [Swing] {
         return swingData
+    }
+    
+    public func getColumn(column: Column) -> [Float] {
+        var data: [Float] = []
+        for swing in swingData {
+            let value = swing.getColumn(column: column)
+            data.append(value)
+        }
+        return data
     }
     
 

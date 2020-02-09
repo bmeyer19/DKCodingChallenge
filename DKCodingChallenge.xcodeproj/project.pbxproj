@@ -26,6 +26,7 @@
 		4A99F30723EE2E7D0046001D /* DKStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99F30623EE2E7D0046001D /* DKStackView.swift */; };
 		4A99F30923EEBECA0046001D /* DKLabelSmall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99F30823EEBECA0046001D /* DKLabelSmall.swift */; };
 		4A99F31123EED4B40046001D /* TestRunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99F31023EED4B40046001D /* TestRunView.swift */; };
+		4A99F31323EF92730046001D /* DKSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99F31223EF92730046001D /* DKSegmentedControl.swift */; };
 		4AA5987623E906DB001DD4AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5987523E906DB001DD4AA /* AppDelegate.swift */; };
 		4AA5987A23E906DB001DD4AA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5987923E906DB001DD4AA /* ViewController.swift */; };
 		4AA5987F23E906DC001DD4AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AA5987E23E906DC001DD4AA /* Assets.xcassets */; };
@@ -54,6 +55,7 @@
 		4A99F30623EE2E7D0046001D /* DKStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DKStackView.swift; sourceTree = "<group>"; };
 		4A99F30823EEBECA0046001D /* DKLabelSmall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DKLabelSmall.swift; sourceTree = "<group>"; };
 		4A99F31023EED4B40046001D /* TestRunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRunView.swift; sourceTree = "<group>"; };
+		4A99F31223EF92730046001D /* DKSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DKSegmentedControl.swift; sourceTree = "<group>"; };
 		4AA5987223E906DB001DD4AA /* DKCodingChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DKCodingChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AA5987523E906DB001DD4AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4AA5987923E906DB001DD4AA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				4A99F2FD23EE06240046001D /* DKButton.swift */,
 				4A99F30123EE07920046001D /* DKLabel.swift */,
 				4A99F30823EEBECA0046001D /* DKLabelSmall.swift */,
+				4A99F31223EF92730046001D /* DKSegmentedControl.swift */,
 				4A99F30623EE2E7D0046001D /* DKStackView.swift */,
 				4A99F30423EE28530046001D /* DKTextField.swift */,
 				4A99F2FF23EE07030046001D /* DKTextView.swift */,
@@ -349,6 +352,7 @@
 				4A99F2EA23ECD48E0046001D /* OperationViewCell.swift in Sources */,
 				4A99F2E123ECCA170046001D /* UIColor + Util.swift in Sources */,
 				4A99F2F723EDF6640046001D /* TestCardView.swift in Sources */,
+				4A99F31323EF92730046001D /* DKSegmentedControl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

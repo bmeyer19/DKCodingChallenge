@@ -15,7 +15,7 @@ class DKLabel: UILabel {
     init() {
         super.init(frame: .zero)
         textColor = .white
-        font = UIFont.init(name: "Futura-Medium", size: 20)
+        font = UIFont.init(name: "Futura-Medium", size: 18)
         textAlignment = .left
     }
     

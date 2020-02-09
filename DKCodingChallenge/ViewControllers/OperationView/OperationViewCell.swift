@@ -8,9 +8,8 @@
 
 import UIKit
 
-enum DisplayMode {
+public enum DisplayMode {
     case operation
-    case algorithm
     case test
 }
 
@@ -54,7 +53,7 @@ class OperationViewCell: UICollectionViewCell {
         case .test:
             testView.isHidden = false
         default:
-            print("todo")
+            print("no display mode")
         }
         
         setupConstraints()

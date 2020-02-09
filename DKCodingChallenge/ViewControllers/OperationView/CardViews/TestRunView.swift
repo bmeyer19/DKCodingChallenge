@@ -14,6 +14,8 @@ class TestRunView: UIView {
     // MARK: - Variables
     
     private var button: UIButton!
+    private var dataLabel: UILabel!
+    private var dataControl: UISegmentedControl!
     private var indexLabelStack: UIStackView!
     private var indexBeginInput: UITextField!
     private var indexEndInput: UITextField!
@@ -29,6 +31,7 @@ class TestRunView: UIView {
     private var stack: UIStackView!
     
     private var operation: Operation!
+    private var columns: [Column] = [.ax,.ay,.az,.wx,.wy,.wz]
     
     // MARK: - Initialization
     
@@ -49,6 +52,16 @@ class TestRunView: UIView {
         button.setTitle("Run", for: .normal)
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         addSubview(button)
+        
+        dataLabel = DKLabelSmall(text: "Data")
+        addSubview(dataLabel)
+        
+        var dataTitles: [String] = []
+        for column in columns {
+            dataTitles.append(column.getName())
+        }
+        dataControl = DKSegmentedControl(titles: dataTitles)
+        addSubview(dataControl)
         
         let indexBeginLabel = DKLabelSmall(text: "Index Begin")
         let indexEndLabel = DKLabelSmall(text: "Index End")
@@ -89,7 +102,7 @@ class TestRunView: UIView {
         outputLabel = DKLabelSmall(text: "Output")
         outputView = DKTextView()
         
-        let inputViews : [UIView] = [indexLabelStack, indexStack, thresholdLabelStack, thresholdStack, winLengthLabel, winLengthInput, outputLabel, outputView]
+        let inputViews : [UIView] = [dataLabel, dataControl, indexLabelStack, indexStack, thresholdLabelStack, thresholdStack, winLengthLabel, winLengthInput, outputLabel, outputView]
         stack = DKStackView(arrangedSubviews: inputViews, axis: .vertical)
         addSubview(stack)
         
@@ -103,13 +116,15 @@ class TestRunView: UIView {
             make.bottom.equalTo(button.snp.top).inset(-20)
         }
         indexLabelStack.snp.makeConstraints{ make in
-            make.height.equalTo(25)
+            make.height.equalTo(20)
+            make.height.equalTo(dataLabel.snp.height)
             make.height.equalTo(thresholdLabelStack.snp.height)
             make.height.equalTo(winLengthLabel.snp.height)
             make.height.equalTo(outputLabel.snp.height)
         }
         indexStack.snp.makeConstraints{ make in
             make.height.equalTo(40)
+            make.height.equalTo(dataControl.snp.height)
             make.height.equalTo(thresholdStack.snp.height)
             make.height.equalTo(winLengthInput.snp.height)
             make.height.equalTo(outputView.snp.height)
@@ -144,7 +159,8 @@ class TestRunView: UIView {
     // MARK: - Functions
     
     private func testOperation() {
-        let data = DataService.shared.getSwingData()
+        let column = columns[dataControl.selectedSegmentIndex]
+        let data = DataService.shared.getColumn(column: column)
         let indexBegin = Int(indexBeginInput.text ?? "0") ?? 0
         let indexEnd = Int(indexEndInput.text ?? "0") ?? 0
         let threshold1Value = Float(threshold1.text ?? "0") ?? 0
@@ -203,7 +219,6 @@ class TestRunView: UIView {
         default:
             print("No Operation Selected")
         }
-        
         outputView.flash(color: .systemTeal)
     }
     

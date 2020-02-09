@@ -38,7 +38,7 @@ class DKTextField: UITextField {
         keyboardAppearance = .dark
         switch inputType {
         case .float:
-            keyboardType = .decimalPad
+            keyboardType = .numbersAndPunctuation
             text = "0.0"
         case .int:
             keyboardType = .numberPad

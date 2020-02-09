@@ -8,22 +8,54 @@
 
 import Foundation
 
+public enum Column {
+    case ax
+    case ay
+    case az
+    case wx
+    case wy
+    case wz
+    
+    public func getName() -> String {
+        switch self {
+        case .ax:
+            return "ax"
+        case .ay:
+            return "ay"
+        case .az:
+            return "az"
+        case .wx:
+            return "wx"
+        case .wy:
+            return "wy"
+        case .wz:
+            return "wz"
+        }
+    }
+}
+
 public struct Swing {
     
     // MARK: - Variables
     
     private var timestamp : Int!
-    private var values : [Float]!
+    private var ax: Float!
+    private var ay: Float!
+    private var az: Float!
+    private var wx: Float!
+    private var wy: Float!
+    private var wz: Float!
     
     // MARK: - Initializer
     
     public init(swingArray : [Substring.SubSequence]) {
         timestamp = Int(swingArray[0])
-        values = []
-        for index in Range(1...6) {
-            let value = Float(swingArray[index]) ?? 0
-            values.append(value)
-        }
+        ax = Float(swingArray[1])
+        ay = Float(swingArray[2])
+        az = Float(swingArray[3])
+        wx = Float(swingArray[4])
+        wy = Float(swingArray[5])
+        wz = Float(swingArray[6])
     }
     
     // MARK: - Methods
@@ -32,32 +64,21 @@ public struct Swing {
         return timestamp
     }
     
-    public func getValues() -> [Float] {
-        return values
-    }
-    
-    public func getax() -> Float {
-        return values[0]
-    }
-    
-    public func getay() -> Float {
-        return values[1]
-    }
-    
-    public func getaz() -> Float {
-        return values[2]
-    }
-    
-    public func getwx() -> Float {
-        return values[3]
-    }
-    
-    public func getwy() -> Float {
-        return values[4]
-    }
-    
-    public func getwz() -> Float {
-        return values[5]
+    public func getColumn(column: Column) -> Float {
+        switch column {
+        case .ax:
+            return ax
+        case .ay:
+            return ay
+        case .az:
+            return az
+        case .wx:
+            return wx
+        case .wy:
+            return wy
+        case .wz:
+            return wz
+        }
     }
     
 }

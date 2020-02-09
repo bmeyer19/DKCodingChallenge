@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum Operation {
+public enum Operation {
     case searchContinuityAboveValue
     case backSearchContinuityWithinRange
     case searchContinuityAboveValueTwoSignals
