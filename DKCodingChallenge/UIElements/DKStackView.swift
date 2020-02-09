@@ -22,6 +22,7 @@ class DKStackView: UIStackView {
         switch axis {
         case .vertical:
             distribution = .equalSpacing
+            spacing = 7.5
         case .horizontal:
             distribution = .fillEqually
             spacing = 20

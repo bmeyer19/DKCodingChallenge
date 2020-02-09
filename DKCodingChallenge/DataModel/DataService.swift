@@ -41,8 +41,4 @@ public class DataService {
         return data
     }
     
-
-    
-    
-    
 }

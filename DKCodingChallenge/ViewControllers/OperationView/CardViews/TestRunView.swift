@@ -16,6 +16,8 @@ class TestRunView: UIView {
     private var button: UIButton!
     private var dataLabel: UILabel!
     private var dataControl: UISegmentedControl!
+    private var dataLabel2: UILabel!
+    private var dataControl2: UISegmentedControl!
     private var indexLabelStack: UIStackView!
     private var indexBeginInput: UITextField!
     private var indexEndInput: UITextField!
@@ -29,6 +31,7 @@ class TestRunView: UIView {
     private var outputLabel: UILabel!
     private var outputView: UITextView!
     private var stack: UIStackView!
+    private var scrollView: UIScrollView!
     
     private var operation: Operation!
     private var columns: [Column] = [.ax,.ay,.az,.wx,.wy,.wz]
@@ -63,6 +66,12 @@ class TestRunView: UIView {
         dataControl = DKSegmentedControl(titles: dataTitles)
         addSubview(dataControl)
         
+        dataLabel2 = DKLabelSmall(text: "Data2")
+        addSubview(dataLabel2)
+        
+        dataControl2 = DKSegmentedControl(titles: dataTitles)
+        addSubview(dataControl2)
+        
         let indexBeginLabel = DKLabelSmall(text: "Index Begin")
         let indexEndLabel = DKLabelSmall(text: "Index End")
         let indexLabels : [UILabel] = [indexBeginLabel, indexEndLabel]
@@ -70,6 +79,7 @@ class TestRunView: UIView {
         
         indexBeginInput = DKTextField(inputType: .int)
         indexEndInput = DKTextField(inputType: .int)
+        indexEndInput.text = String(DataService.shared.getSwingData().count - 1)
         let indexInputs : [UIView] = [indexBeginInput, indexEndInput]
         indexStack = DKStackView(arrangedSubviews: indexInputs, axis: .horizontal)
         
@@ -98,22 +108,36 @@ class TestRunView: UIView {
         
         winLengthLabel = DKLabelSmall(text: "Win Length")
         winLengthInput = DKTextField(inputType: .int)
+        winLengthInput.text = "1"
         
         outputLabel = DKLabelSmall(text: "Output")
         outputView = DKTextView()
+    
+        scrollView = UIScrollView()
+        addSubview(scrollView)
         
-        let inputViews : [UIView] = [dataLabel, dataControl, indexLabelStack, indexStack, thresholdLabelStack, thresholdStack, winLengthLabel, winLengthInput, outputLabel, outputView]
+        let inputViews: [UIView]!
+        switch operation {
+        case .searchContinuityAboveValueTwoSignals:
+            inputViews = [dataLabel, dataControl, dataLabel2, dataControl2, indexLabelStack, indexStack, thresholdLabelStack, thresholdStack, winLengthLabel, winLengthInput, outputLabel, outputView]
+        default:
+            inputViews = [dataLabel, dataControl, indexLabelStack, indexStack, thresholdLabelStack, thresholdStack, winLengthLabel, winLengthInput, outputLabel, outputView]
+        }
         stack = DKStackView(arrangedSubviews: inputViews, axis: .vertical)
-        addSubview(stack)
+        scrollView.addSubview(stack)
         
         setupConstraints()
     }
     
     private func setupConstraints() {
-        stack.snp.makeConstraints{ make in
+        scrollView.snp.makeConstraints{ make in
             make.top.equalToSuperview().inset(10)
             make.left.right.equalToSuperview().inset(20)
             make.bottom.equalTo(button.snp.top).inset(-20)
+        }
+        stack.snp.makeConstraints{ make in
+            make.left.top.bottom.equalToSuperview()
+            make.width.equalTo(scrollView.snp.width)
         }
         indexLabelStack.snp.makeConstraints{ make in
             make.height.equalTo(20)
@@ -127,7 +151,27 @@ class TestRunView: UIView {
             make.height.equalTo(dataControl.snp.height)
             make.height.equalTo(thresholdStack.snp.height)
             make.height.equalTo(winLengthInput.snp.height)
-            make.height.equalTo(outputView.snp.height)
+        }
+        switch operation {
+        case .searchContinuityAboveValueTwoSignals:
+            dataLabel2.snp.makeConstraints{ make in
+                make.height.equalTo(20)
+            }
+            dataControl2.snp.makeConstraints{ make in
+                make.height.equalTo(40)
+            }
+        default:
+            print("only one dataset")
+        }
+        switch operation {
+        case .searchMultiContinuityWithinRange:
+            outputView.snp.makeConstraints{ make in
+                make.height.equalTo(100)
+            }
+        default:
+            outputView.snp.makeConstraints{ make in
+                make.height.equalTo(40)
+            }
         }
         button.snp.makeConstraints{ make in
             make.left.right.bottom.equalToSuperview().inset(20)
@@ -138,21 +182,8 @@ class TestRunView: UIView {
     // MARK: - User Interactions
     
     @objc private func buttonPressed() {
-        let indexBegin = Int(indexBeginInput.text ?? "0") ?? 0
-        let indexEnd = Int(indexEndInput.text ?? "0") ?? 0
-        switch operation {
-        case .backSearchContinuityWithinRange:
-            if indexEnd > indexBegin {
-                indexEndInput.flash(color: .systemRed)
-            } else {
-                testOperation()
-            }
-        default:
-            if indexEnd < indexBegin {
-                indexBeginInput.flash(color: .systemRed)
-            } else {
-                testOperation()
-            }
+        if inputIsValid() {
+            testOperation()
         }
     }
     
@@ -161,12 +192,12 @@ class TestRunView: UIView {
     private func testOperation() {
         let column = columns[dataControl.selectedSegmentIndex]
         let data = DataService.shared.getColumn(column: column)
+        let data2 = DataService.shared.getColumn(column: column)
         let indexBegin = Int(indexBeginInput.text ?? "0") ?? 0
         let indexEnd = Int(indexEndInput.text ?? "0") ?? 0
         let threshold1Value = Float(threshold1.text ?? "0") ?? 0
         let threshold2Value = Float(threshold2.text ?? "0") ?? 0
         let winLength = Int(winLengthInput.text ?? "0") ?? 0
-        
         switch operation {
         case .searchContinuityAboveValue:
             let result = CodingChallenge.shared.searchContinuityAboveValue(
@@ -178,7 +209,7 @@ class TestRunView: UIView {
             if let output = result {
                 outputView.text = String(output)
             } else {
-                outputView.text = "none"
+                outputView.text = "No Such Continuity Found"
             }
         case .backSearchContinuityWithinRange:
             let result = CodingChallenge.shared.backSearchContinuityWithinRange(
@@ -191,12 +222,12 @@ class TestRunView: UIView {
             if let output = result {
                 outputView.text = String(output)
             } else {
-                outputView.text = "none"
+                outputView.text = "No Such Continuity Found"
             }
         case .searchContinuityAboveValueTwoSignals:
             let result = CodingChallenge.shared.searchContinuityAboveValueTwoSignals(
                 data1: data,
-                data2: data,
+                data2: data2,
                 indexBegin: indexBegin,
                 indexEnd: indexEnd,
                 threshold1: threshold1Value,
@@ -205,7 +236,7 @@ class TestRunView: UIView {
             if let output = result {
                 outputView.text = String(output)
             } else {
-                outputView.text = "none"
+                outputView.text = "No Such Continuity Found"
             }
         case .searchMultiContinuityWithinRange:
             let result = CodingChallenge.shared.searchMultiContinuityWithinRange(
@@ -220,6 +251,52 @@ class TestRunView: UIView {
             print("No Operation Selected")
         }
         outputView.flash(color: .systemTeal)
+    }
+    
+    private func inputIsValid() -> Bool {
+        let indexBegin = Int(indexBeginInput.text ?? "0") ?? 0
+        let indexEnd = Int(indexEndInput.text ?? "0") ?? 0
+        if indexEnd < DataService.shared.getSwingData().count{
+            if indexBegin < DataService.shared.getSwingData().count {
+                if let text1 = threshold1.text, let text2 = threshold2.text {
+                    if let _ = Float(text1), let _ = Float(text2) {
+                        switch operation {
+                        case .backSearchContinuityWithinRange:
+                            if indexEnd > indexBegin {
+                                indexEndInput.flash(color: .systemRed)
+                                outputView.flash(color: .systemRed)
+                                outputView.text = "End Index > Begin Index"
+                            } else {
+                                return true
+                            }
+                        default:
+                            if indexEnd < indexBegin {
+                                indexBeginInput.flash(color: .systemRed)
+                                outputView.flash(color: .systemRed)
+                                outputView.text = "Begin Index > End Index"
+                            } else {
+                                return true
+                            }
+                        }
+                    } else {
+                        threshold1.flash(color: .systemRed)
+                        threshold2.flash(color: .systemRed)
+                        outputView.flash(color: .systemRed)
+                        outputView.text = "Invalid Threshold"
+                    }
+                }
+
+            } else {
+                indexBeginInput.flash(color: .systemRed)
+                outputView.flash(color: .systemRed)
+                outputView.text = "Index out of range"
+            }
+        } else {
+            indexEndInput.flash(color: .systemRed)
+            outputView.flash(color: .systemRed)
+            outputView.text = "Index out of range"
+        }
+        return false
     }
     
 }

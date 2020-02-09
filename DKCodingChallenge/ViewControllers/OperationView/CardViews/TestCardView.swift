@@ -69,6 +69,11 @@ class TestCardView: UIView {
     // MARK: - Functions
     
     public func configure(operation: Operation) {
+        for view in subviews {
+            view.removeFromSuperview()
+        }
+        setupViews()
+        setupConstraints()
         setupTestView(view: TestRunView(operation: operation))
     }
     

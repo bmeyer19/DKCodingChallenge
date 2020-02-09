@@ -8,32 +8,6 @@
 
 import Foundation
 
-public enum Column {
-    case ax
-    case ay
-    case az
-    case wx
-    case wy
-    case wz
-    
-    public func getName() -> String {
-        switch self {
-        case .ax:
-            return "ax"
-        case .ay:
-            return "ay"
-        case .az:
-            return "az"
-        case .wx:
-            return "wx"
-        case .wy:
-            return "wy"
-        case .wz:
-            return "wz"
-        }
-    }
-}
-
 public struct Swing {
     
     // MARK: - Variables

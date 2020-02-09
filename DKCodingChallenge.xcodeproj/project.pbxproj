@@ -27,6 +27,7 @@
 		4A99F30923EEBECA0046001D /* DKLabelSmall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99F30823EEBECA0046001D /* DKLabelSmall.swift */; };
 		4A99F31123EED4B40046001D /* TestRunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99F31023EED4B40046001D /* TestRunView.swift */; };
 		4A99F31323EF92730046001D /* DKSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99F31223EF92730046001D /* DKSegmentedControl.swift */; };
+		4A99F31523EFD45F0046001D /* Column.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99F31423EFD45F0046001D /* Column.swift */; };
 		4AA5987623E906DB001DD4AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5987523E906DB001DD4AA /* AppDelegate.swift */; };
 		4AA5987A23E906DB001DD4AA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5987923E906DB001DD4AA /* ViewController.swift */; };
 		4AA5987F23E906DC001DD4AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AA5987E23E906DC001DD4AA /* Assets.xcassets */; };
@@ -56,6 +57,7 @@
 		4A99F30823EEBECA0046001D /* DKLabelSmall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DKLabelSmall.swift; sourceTree = "<group>"; };
 		4A99F31023EED4B40046001D /* TestRunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRunView.swift; sourceTree = "<group>"; };
 		4A99F31223EF92730046001D /* DKSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DKSegmentedControl.swift; sourceTree = "<group>"; };
+		4A99F31423EFD45F0046001D /* Column.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Column.swift; sourceTree = "<group>"; };
 		4AA5987223E906DB001DD4AA /* DKCodingChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DKCodingChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AA5987523E906DB001DD4AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4AA5987923E906DB001DD4AA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				4AA5988E23E90851001DD4AA /* DataService.swift */,
 				4AA5988C23E90847001DD4AA /* Swing.swift */,
 				4A99F2F223ECF3F90046001D /* Operation.swift */,
+				4A99F31423EFD45F0046001D /* Column.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				4A99F30023EE07030046001D /* DKTextView.swift in Sources */,
 				4A99F2EE23ECD8AF0046001D /* OperationCollectionView.swift in Sources */,
 				4A99F30523EE28530046001D /* DKTextField.swift in Sources */,
+				4A99F31523EFD45F0046001D /* Column.swift in Sources */,
 				4A99F2E323ECCA240046001D /* UIView + Util.swift in Sources */,
 				4A99F30723EE2E7D0046001D /* DKStackView.swift in Sources */,
 				4A99F2E823ECD1010046001D /* OperationView.swift in Sources */,
@@ -490,7 +494,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XVX32H2Y6D;
+				DEVELOPMENT_TEAM = MLC946D5J4;
 				INFOPLIST_FILE = DKCodingChallenge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -510,7 +514,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XVX32H2Y6D;
+				DEVELOPMENT_TEAM = MLC946D5J4;
 				INFOPLIST_FILE = DKCodingChallenge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
