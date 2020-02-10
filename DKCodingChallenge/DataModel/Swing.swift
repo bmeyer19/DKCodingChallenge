@@ -13,34 +13,34 @@ public struct Swing {
     
     // MARK: - Variables
     
-    private var timestamp : Int!
-    private var ax: Float!
-    private var ay: Float!
-    private var az: Float!
-    private var wx: Float!
-    private var wy: Float!
-    private var wz: Float!
+    private var timestamp : NSNumber!
+    private var ax: NSNumber!
+    private var ay: NSNumber!
+    private var az: NSNumber!
+    private var wx: NSNumber!
+    private var wy: NSNumber!
+    private var wz: NSNumber!
     
     // MARK: - Initializer
     
     // Creates the object from a row of a CSV file
     public init(swingArray : [Substring.SubSequence]) {
-        timestamp = Int(swingArray[0])
-        ax = Float(swingArray[1])
-        ay = Float(swingArray[2])
-        az = Float(swingArray[3])
-        wx = Float(swingArray[4])
-        wy = Float(swingArray[5])
-        wz = Float(swingArray[6])
+        timestamp = NSNumber(value: Int(swingArray[0]) ?? 0)
+        ax = NSNumber(value: Float(swingArray[1]) ?? 0)
+        ay = NSNumber(value: Float(swingArray[2]) ?? 0)
+        az = NSNumber(value: Float(swingArray[3]) ?? 0)
+        wx = NSNumber(value: Float(swingArray[4]) ?? 0)
+        wy = NSNumber(value: Float(swingArray[5]) ?? 0)
+        wz = NSNumber(value: Float(swingArray[6]) ?? 0)
     }
     
     // MARK: - Methods
     
-    public func getTimestamp() -> Int {
+    public func getTimestamp() -> NSNumber {
         return timestamp
     }
     
-    public func getColumn(column: Column) -> Float {
+    public func getColumn(column: Column) -> NSNumber {
         switch column {
         case .ax:
             return ax

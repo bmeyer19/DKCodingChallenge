@@ -33,17 +33,17 @@ public class DataService {
         return swingData
     }
     
-    public func getColumn(column: Column) -> [Float] {
-        var data: [Float] = []
+    public func getColumn(column: Column) -> NSArray {
+        var data: [NSNumber] = []
         for swing in swingData {
             let value = swing.getColumn(column: column)
             data.append(value)
         }
-        return data
+        return data as NSArray
     }
     
     // get a string description of an operation with given parameters
-    public func testOperation(operation: Operation, data: [Float], data2: [Float], indexBegin: Int, indexEnd: Int, threshold1: Float, threshold2: Float, winLength: Int) -> String {
+    public func testOperation(operation: Operation, data: NSArray, data2: NSArray, indexBegin: Int, indexEnd: Int, threshold1: Float, threshold2: Float, winLength: Int) -> String {
         switch operation {
         case .searchContinuityAboveValue:
             let result = CodingChallenge.shared.searchContinuityAboveValue(
@@ -59,7 +59,7 @@ public class DataService {
             }
         case .backSearchContinuityWithinRange:
             let result = CodingChallenge.shared.backSearchContinuityWithinRange(
-                data: data,
+                data: [],
                 indexBegin: indexBegin,
                 indexEnd: indexEnd,
                 thresholdLo: threshold1,
@@ -72,8 +72,8 @@ public class DataService {
             }
         case .searchContinuityAboveValueTwoSignals:
             let result = CodingChallenge.shared.searchContinuityAboveValueTwoSignals(
-                data1: data,
-                data2: data2,
+                data1: [],
+                data2: [],
                 indexBegin: indexBegin,
                 indexEnd: indexEnd,
                 threshold1: threshold1,
@@ -86,7 +86,7 @@ public class DataService {
             }
         case .searchMultiContinuityWithinRange:
             let result = CodingChallenge.shared.searchMultiContinuityWithinRange(
-                data: data,
+                data: [],
                 indexBegin: indexBegin,
                 indexEnd: indexEnd,
                 thresholdLo: threshold1,
