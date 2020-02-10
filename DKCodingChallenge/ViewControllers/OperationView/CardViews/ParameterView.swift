@@ -9,28 +9,30 @@
 import UIKit
 import SnapKit
 
+// Reusable view for selecting parameters, testing operations, and displaying results
+// Shows different elements depending on the type of operation
 class ParameterView: UIView {
     
     // MARK: - Variables
     
-    private var button: UIButton!
-    private var dataLabel: UILabel!
-    private var dataControl: UISegmentedControl!
-    private var dataLabel2: UILabel!
-    private var dataControl2: UISegmentedControl!
-    private var indexLabelStack: UIStackView!
-    private var indexBeginInput: UITextField!
-    private var indexEndInput: UITextField!
-    private var indexStack: UIStackView!
-    private var thresholdLabelStack: UIStackView!
-    private var threshold1: UITextField!
-    private var threshold2: UITextField!
-    private var thresholdStack: UIStackView!
-    private var winLengthLabel: UILabel!
-    private var winLengthInput: UITextField!
-    private var outputLabel: UILabel!
-    private var outputView: UITextView!
-    private var stack: UIStackView!
+    private var button: DKButton!
+    private var dataLabel: DKLabelSmall!
+    private var dataControl: DKSegmentedControl!
+    private var dataLabel2: DKLabelSmall!
+    private var dataControl2: DKSegmentedControl!
+    private var indexLabelStack: DKStackView!
+    private var indexBeginInput: DKTextField!
+    private var indexEndInput: DKTextField!
+    private var indexStack: DKStackView!
+    private var thresholdLabelStack: DKStackView!
+    private var threshold1: DKTextField!
+    private var threshold2: DKTextField!
+    private var thresholdStack: DKStackView!
+    private var winLengthLabel: DKLabelSmall!
+    private var winLengthInput: DKTextField!
+    private var outputLabel: DKLabelSmall!
+    private var outputView: DKTextView!
+    private var stack: DKStackView!
     private var scrollView: UIScrollView!
     
     private var operation: Operation!
@@ -56,13 +58,14 @@ class ParameterView: UIView {
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         addSubview(button)
         
-        dataLabel = DKLabelSmall(text: "Data")
-        addSubview(dataLabel)
-        
         var dataTitles: [String] = []
         for column in columns {
             dataTitles.append(column.getName())
         }
+        
+        dataLabel = DKLabelSmall(text: "Data")
+        addSubview(dataLabel)
+        
         dataControl = DKSegmentedControl(titles: dataTitles)
         addSubview(dataControl)
         
@@ -90,10 +93,12 @@ class ParameterView: UIView {
             indexEndInput.text = String(maxIndex)
         }
         
+        // Setup varying threshold inputs depending on the operation
         let threshold1Label = DKLabelSmall(text: "Threshold Lo")
         let threshold2Label = DKLabelSmall(text: "Threshold Hi")
         threshold1 = DKTextField(inputType: .float)
         threshold2 = DKTextField(inputType: .float)
+        threshold2.text = "1.0"
         let thresholdLabels: [UIView]!
         let thresholdInputs: [UIView]!
         switch operation {
@@ -160,6 +165,7 @@ class ParameterView: UIView {
             make.height.equalTo(thresholdStack.snp.height)
             make.height.equalTo(winLengthInput.snp.height)
         }
+        // Only setup the second dataset based on the operation
         switch operation {
         case .searchContinuityAboveValueTwoSignals:
             dataLabel2.snp.makeConstraints{ make in
@@ -171,6 +177,7 @@ class ParameterView: UIView {
         default:
             ()
         }
+        // Setup the height of the output based on the operation
         switch operation {
         case .searchMultiContinuityWithinRange:
             outputView.snp.makeConstraints{ make in
@@ -201,11 +208,11 @@ class ParameterView: UIView {
         default:
             ()
         }
-        
     }
     
     // MARK: - Functions
     
+    // Takes the parameters from the interface and tests the operation on them
     private func testOperation() {
         let column = columns[dataControl.selectedSegmentIndex]
         let column2 = columns[dataControl2.selectedSegmentIndex]
@@ -271,6 +278,7 @@ class ParameterView: UIView {
         outputView.flash(color: .systemTeal)
     }
     
+    // Checks input before testing the algorithm and provides error messages if something is bad
     private func inputIsValid() -> Bool {
         let indexBegin = Int(indexBeginInput.text ?? "0") ?? 0
         let indexEnd = Int(indexEndInput.text ?? "0") ?? 0

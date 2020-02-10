@@ -135,13 +135,8 @@
 		4A99F30323EE08C60046001D /* UIElements */ = {
 			isa = PBXGroup;
 			children = (
-				4A99F2FD23EE06240046001D /* DKButton.swift */,
-				4A99F30123EE07920046001D /* DKLabel.swift */,
-				4A99F30823EEBECA0046001D /* DKLabelSmall.swift */,
-				4A99F31223EF92730046001D /* DKSegmentedControl.swift */,
-				4A99F30623EE2E7D0046001D /* DKStackView.swift */,
-				4A99F30423EE28530046001D /* DKTextField.swift */,
-				4A99F2FF23EE07030046001D /* DKTextView.swift */,
+				4AFF012B23F1500A007676F2 /* DK */,
+				4A99F2DF23ECC9FE0046001D /* Extensions */,
 			);
 			path = UIElements;
 			sourceTree = "<group>";
@@ -170,7 +165,6 @@
 				4AA5988923E9070B001DD4AA /* AppSetup */,
 				4A99F2E423ECCD3C0046001D /* ViewControllers */,
 				4AA5988A23E90728001DD4AA /* DataModel */,
-				4A99F2DF23ECC9FE0046001D /* Extensions */,
 				4A99F30323EE08C60046001D /* UIElements */,
 				4AA5988B23E90730001DD4AA /* CodingChallenge */,
 				4AA5987E23E906DC001DD4AA /* Assets.xcassets */,
@@ -207,6 +201,20 @@
 				4AA5989023E908DB001DD4AA /* latestSwing.csv */,
 			);
 			path = CodingChallenge;
+			sourceTree = "<group>";
+		};
+		4AFF012B23F1500A007676F2 /* DK */ = {
+			isa = PBXGroup;
+			children = (
+				4A99F2FD23EE06240046001D /* DKButton.swift */,
+				4A99F30123EE07920046001D /* DKLabel.swift */,
+				4A99F30823EEBECA0046001D /* DKLabelSmall.swift */,
+				4A99F31223EF92730046001D /* DKSegmentedControl.swift */,
+				4A99F30623EE2E7D0046001D /* DKStackView.swift */,
+				4A99F30423EE28530046001D /* DKTextField.swift */,
+				4A99F2FF23EE07030046001D /* DKTextView.swift */,
+			);
+			path = DK;
 			sourceTree = "<group>";
 		};
 		8DC1D8DEC375258AE213FE27 /* Pods */ = {

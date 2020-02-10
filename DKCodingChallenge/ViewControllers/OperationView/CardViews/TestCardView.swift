@@ -14,7 +14,7 @@ class TestCardView: UIView {
     
     // MARK: - Variables
     
-    private var title: UILabel!
+    private var title: DKLabel!
     public var backButton: UIButton!
     private var body: UIView!
     private var operation: Operation!

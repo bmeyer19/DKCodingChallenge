@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     // MARK: - Variables
     
     private var logo: UIImageView!
-    private var label: UILabel!
+    private var label: DKLabel!
     private var collectionView : OperationView!
     
     private let heightMultiplier : CGFloat = 0.725

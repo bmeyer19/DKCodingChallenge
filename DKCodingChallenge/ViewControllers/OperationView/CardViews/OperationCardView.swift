@@ -14,9 +14,9 @@ class OperationCardView: UIView {
     
     // MARK: - Variables
     
-    private var title: UILabel!
-    private var body: UITextView!
-    public var button: UIButton!
+    private var title: DKLabel!
+    private var body: DKTextView!
+    public var button: DKButton!
     private var operation: Operation!
     
     // MARK: - Initialization

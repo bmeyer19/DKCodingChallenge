@@ -6,6 +6,7 @@
 //  Copyright © 2020 bmeyer. All rights reserved.
 //
 
+// For csv reading to import the dataset, see DataModel > DataService.swift
 class CodingChallenge {
     
     static let shared = CodingChallenge()
@@ -38,6 +39,7 @@ class CodingChallenge {
     
     // Operation 2: backSearchContinuityWithinRange(data, indexBegin, indexEnd, thresholdLo, thresholdHi, winLength) - from indexBegin to indexEnd (where indexBegin is larger than indexEnd), search data for values that are higher than thresholdLo and lower than thresholdHi. Return the first index where data has values that meet this criteria for at least winLength samples in a row.
     public func backSearchContinuityWithinRange(data: [Float], indexBegin: Int, indexEnd: Int, thresholdLo: Float, thresholdHi: Float, winLength: Int) -> Int? {
+        var continuousSwingsStartIndex = indexBegin
         var continuousSwingsWithinRange = 0
         for index in Range(indexEnd...indexBegin).reversed() {
             var swingHasValueWithinRange = false
@@ -45,9 +47,12 @@ class CodingChallenge {
                 swingHasValueWithinRange = true
             }
             if swingHasValueWithinRange {
+                if continuousSwingsWithinRange == 0 {
+                    continuousSwingsStartIndex = index
+                }
                 continuousSwingsWithinRange += 1
                 if continuousSwingsWithinRange >= winLength {
-                    return index
+                    return continuousSwingsStartIndex
                 }
             } else {
                 continuousSwingsWithinRange = 0
