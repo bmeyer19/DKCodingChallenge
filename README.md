@@ -3,7 +3,7 @@
 **Overview**
 
 I thought it would be fun to create an iOS app as a part of the Coding Challenge, 
-so here is a simple interface that will let you run tests for the Coding Challenge operations and show you the outputs.
+so here is a simple interface that will let you run tests for the Coding Challenge operations and display the outputs.
 
 Hope you enjoy it!
 
