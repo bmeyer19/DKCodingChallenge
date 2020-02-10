@@ -9,7 +9,7 @@ Hope you enjoy it!
 
 **Getting Started**
 
-1. Clone this repository
+1. Download this repository
 2. Open DKCodingChallenge.xcworkspace in Xcode
 3. Set your test device in **Product > Destination** - I recommend connecting a personal device or using an iPhone 11 Simulator
 4. Set your development team in **Signing & Capabilities > Signing > Team** - Depending on your development team setup, it is possible that you will need to change more settings at this step
