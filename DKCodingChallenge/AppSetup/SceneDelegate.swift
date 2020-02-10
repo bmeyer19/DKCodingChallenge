@@ -25,6 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.backgroundColor = .DKBackground
         window?.rootViewController = ViewController()
         window?.makeKeyAndVisible()
+        
         DataService.shared.readCSV("latestSwing")
     }
 
