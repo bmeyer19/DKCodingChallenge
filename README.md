@@ -18,9 +18,9 @@ Hope you enjoy it!
 **Coding Challenge**
 
 The app interface will allow you to test the operations on the different columns of the provided dataset. 
-However, to see the code for these operations, you can find the CodingChallenge.swift file at:
+However, to see the code for these operations, you can find the CodingChallenge.swift file at: **DKCodingChallenge > CodingChallenge > CodingChallenge.swift**
 
-If you would like to run these on your own data, you can add your .csv file to the app and change the variable *filename* in 
+If you would like to run these on your own data, you can import a .csv file and change the filename in the *readCSV* function in **DKCodingChallenge > AppSetup > SceneDelegate.swift**. If you want to see how this converts this from .csv format to columns of data for the operations, see **DKCodingChallenge > DataModel > DataService.swift**
 
 **Bonus Question**
 
