@@ -48,7 +48,7 @@ class CodingChallenge {
     
     // Operation 2: backSearchContinuityWithinRange(data, indexBegin, indexEnd, thresholdLo, thresholdHi, winLength) - from indexBegin to indexEnd (where indexBegin is larger than indexEnd), search data for values that are higher than thresholdLo and lower than thresholdHi. Return the first index where data has values that meet this criteria for at least winLength samples in a row.
     public func backSearchContinuityWithinRange(data: NSArray, indexBegin: Int, indexEnd: Int, thresholdLo: Float, thresholdHi: Float, winLength: Int) -> Int? {
-        let predicateLo = NSPredicate(format: "floatValue > %@", argumentArray: [thresholdLo])
+        let predicate = NSPredicate(format: "floatValue > %@", argumentArray: [thresholdLo])
         let indices = continuityHelper(data: data, predicate: predicate, winLength: winLength)
         print(indices)
         return indices[0].0
