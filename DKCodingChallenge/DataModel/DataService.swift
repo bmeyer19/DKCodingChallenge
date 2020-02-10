@@ -42,4 +42,60 @@ public class DataService {
         return data
     }
     
+    // get a string description of an operation with given parameters
+    public func testOperation(operation: Operation, data: [Float], data2: [Float], indexBegin: Int, indexEnd: Int, threshold1: Float, threshold2: Float, winLength: Int) -> String {
+        switch operation {
+        case .searchContinuityAboveValue:
+            let result = CodingChallenge.shared.searchContinuityAboveValue(
+                data: data,
+                indexBegin: indexBegin,
+                indexEnd: indexEnd,
+                threshold: threshold1,
+                winLength: winLength)
+            if let output = result {
+                return String(output)
+            } else {
+                return "No Continuity Found"
+            }
+        case .backSearchContinuityWithinRange:
+            let result = CodingChallenge.shared.backSearchContinuityWithinRange(
+                data: data,
+                indexBegin: indexBegin,
+                indexEnd: indexEnd,
+                thresholdLo: threshold1,
+                thresholdHi: threshold2,
+                winLength: winLength)
+            if let output = result {
+                return String(output)
+            } else {
+                return "No Continuity Found"
+            }
+        case .searchContinuityAboveValueTwoSignals:
+            let result = CodingChallenge.shared.searchContinuityAboveValueTwoSignals(
+                data1: data,
+                data2: data2,
+                indexBegin: indexBegin,
+                indexEnd: indexEnd,
+                threshold1: threshold1,
+                threshold2: threshold2,
+                winLength: winLength)
+            if let output = result {
+                return String(output)
+            } else {
+                return "No Continuity Found"
+            }
+        case .searchMultiContinuityWithinRange:
+            let result = CodingChallenge.shared.searchMultiContinuityWithinRange(
+                data: data,
+                indexBegin: indexBegin,
+                indexEnd: indexEnd,
+                thresholdLo: threshold1,
+                thresholdHi: threshold2,
+                winLength: winLength)
+            return result.description
+        }
+       
+        
+    }
+    
 }

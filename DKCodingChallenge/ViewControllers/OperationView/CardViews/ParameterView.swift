@@ -25,8 +25,8 @@ class ParameterView: UIView {
     private var indexEndInput: DKTextField!
     private var indexStack: DKStackView!
     private var thresholdLabelStack: DKStackView!
-    private var threshold1: DKTextField!
-    private var threshold2: DKTextField!
+    private var threshold1Input: DKTextField!
+    private var threshold2Input: DKTextField!
     private var thresholdStack: DKStackView!
     private var winLengthLabel: DKLabelSmall!
     private var winLengthInput: DKTextField!
@@ -96,24 +96,24 @@ class ParameterView: UIView {
         // Setup varying threshold inputs depending on the operation
         let threshold1Label = DKLabelSmall(text: "Threshold Lo")
         let threshold2Label = DKLabelSmall(text: "Threshold Hi")
-        threshold1 = DKTextField(inputType: .float)
-        threshold2 = DKTextField(inputType: .float)
-        threshold2.text = "1.0"
+        threshold1Input = DKTextField(inputType: .float)
+        threshold2Input = DKTextField(inputType: .float)
+        threshold2Input.text = "1.0"
         let thresholdLabels: [UIView]!
         let thresholdInputs: [UIView]!
         switch operation {
         case .searchContinuityAboveValue:
              thresholdLabels = [threshold1Label]
-             thresholdInputs = [threshold1]
+             thresholdInputs = [threshold1Input]
              threshold1Label.text = "Threshold"
         case .searchContinuityAboveValueTwoSignals:
             thresholdLabels = [threshold1Label, threshold2Label]
-            thresholdInputs = [threshold1, threshold2]
+            thresholdInputs = [threshold1Input, threshold2Input]
             threshold1Label.text = "Threshold 1"
             threshold2Label.text = "Threshold 2"
         default:
             thresholdLabels = [threshold1Label, threshold2Label]
-            thresholdInputs = [threshold1, threshold2]
+            thresholdInputs = [threshold1Input, threshold2Input]
         }
         thresholdLabelStack = DKStackView(arrangedSubviews: thresholdLabels, axis: .horizontal)
         thresholdStack = DKStackView(arrangedSubviews: thresholdInputs, axis: .horizontal)
@@ -220,61 +220,19 @@ class ParameterView: UIView {
         let data2 = DataService.shared.getColumn(column: column2)
         let indexBegin = Int(indexBeginInput.text ?? "0") ?? 0
         let indexEnd = Int(indexEndInput.text ?? "0") ?? 0
-        let threshold1Value = Float(threshold1.text ?? "0") ?? 0
-        let threshold2Value = Float(threshold2.text ?? "0") ?? 0
+        let threshold1Value = Float(threshold1Input.text ?? "0") ?? 0
+        let threshold2Value = Float(threshold2Input.text ?? "0") ?? 0
         let winLength = Int(winLengthInput.text ?? "0") ?? 0
-        switch operation {
-        case .searchContinuityAboveValue:
-            let result = CodingChallenge.shared.searchContinuityAboveValue(
-                data: data,
-                indexBegin: indexBegin,
-                indexEnd: indexEnd,
-                threshold: threshold1Value,
-                winLength: winLength)
-            if let output = result {
-                outputView.text = String(output)
-            } else {
-                outputView.text = "No Continuity Found"
-            }
-        case .backSearchContinuityWithinRange:
-            let result = CodingChallenge.shared.backSearchContinuityWithinRange(
-                data: data,
-                indexBegin: indexBegin,
-                indexEnd: indexEnd,
-                thresholdLo: threshold1Value,
-                thresholdHi: threshold2Value,
-                winLength: winLength)
-            if let output = result {
-                outputView.text = String(output)
-            } else {
-                outputView.text = "No Continuity Found"
-            }
-        case .searchContinuityAboveValueTwoSignals:
-            let result = CodingChallenge.shared.searchContinuityAboveValueTwoSignals(
-                data1: data,
-                data2: data2,
-                indexBegin: indexBegin,
-                indexEnd: indexEnd,
-                threshold1: threshold1Value,
-                threshold2: threshold2Value,
-                winLength: winLength)
-            if let output = result {
-                outputView.text = String(output)
-            } else {
-                outputView.text = "No Continuity Found"
-            }
-        case .searchMultiContinuityWithinRange:
-            let result = CodingChallenge.shared.searchMultiContinuityWithinRange(
-                data: data,
-                indexBegin: indexBegin,
-                indexEnd: indexEnd,
-                thresholdLo: threshold1Value,
-                thresholdHi: threshold2Value,
-                winLength: winLength)
-            outputView.text = result.description
-        default:
-            print("No Operation Selected")
-        }
+        let outputText = DataService.shared.testOperation(
+            operation: operation,
+            data: data,
+            data2: data2,
+            indexBegin: indexBegin,
+            indexEnd: indexEnd,
+            threshold1: threshold1Value,
+            threshold2: threshold2Value,
+            winLength: winLength)
+        outputView.text = outputText
         outputView.flash(color: .systemTeal)
     }
     
@@ -284,7 +242,7 @@ class ParameterView: UIView {
         let indexEnd = Int(indexEndInput.text ?? "0") ?? 0
         if indexEnd < DataService.shared.getSwingData().count{
             if indexBegin < DataService.shared.getSwingData().count {
-                if let text1 = threshold1.text, let text2 = threshold2.text {
+                if let text1 = threshold1Input.text, let text2 = threshold2Input.text {
                     if let _ = Float(text1), let _ = Float(text2) {
                         switch operation {
                         case .backSearchContinuityWithinRange:
@@ -305,8 +263,8 @@ class ParameterView: UIView {
                             }
                         }
                     } else {
-                        threshold1.flash(color: .systemRed)
-                        threshold2.flash(color: .systemRed)
+                        threshold1Input.flash(color: .systemRed)
+                        threshold2Input.flash(color: .systemRed)
                         outputView.flash(color: .systemRed)
                         outputView.text = "Invalid Threshold"
                     }
