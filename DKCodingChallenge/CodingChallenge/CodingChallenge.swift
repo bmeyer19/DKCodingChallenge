@@ -27,11 +27,11 @@ class CodingChallenge {
                     continuousSwingsStartIndex = index
                 }
                 continuousSwingsAboveThreshold += 1
-                if continuousSwingsAboveThreshold >= winLength {
-                    return continuousSwingsStartIndex
-                }
             } else {
                 continuousSwingsAboveThreshold = 0
+            }
+            if continuousSwingsAboveThreshold >= winLength {
+                return continuousSwingsStartIndex
             }
         }
         return nil
@@ -51,11 +51,11 @@ class CodingChallenge {
                     continuousSwingsStartIndex = index
                 }
                 continuousSwingsWithinRange += 1
-                if continuousSwingsWithinRange >= winLength {
-                    return continuousSwingsStartIndex
-                }
             } else {
                 continuousSwingsWithinRange = 0
+            }
+            if continuousSwingsWithinRange >= winLength {
+                return continuousSwingsStartIndex
             }
         }
         return nil
@@ -75,11 +75,11 @@ class CodingChallenge {
                     continuousSwingsStartIndex = index
                 }
                 continuousSwingsAboveThreshold += 1
-                if continuousSwingsAboveThreshold >= winLength {
-                    return continuousSwingsStartIndex
-                }
             } else {
                 continuousSwingsAboveThreshold = 0
+            }
+            if continuousSwingsAboveThreshold >= winLength {
+                return continuousSwingsStartIndex
             }
         }
         return nil
@@ -100,11 +100,11 @@ class CodingChallenge {
                     continuousSwingsStartIndex = index
                 }
                 continuousSwingsWithinRange += 1
-                if continuousSwingsWithinRange >= winLength {
-                    continuousSwingsStartingIndices.append((continuousSwingsStartIndex,index))
-                }
             } else {
                 continuousSwingsWithinRange = 0
+            }
+            if continuousSwingsWithinRange >= winLength {
+                continuousSwingsStartingIndices.append((continuousSwingsStartIndex,index))
             }
         }
         return continuousSwingsStartingIndices
