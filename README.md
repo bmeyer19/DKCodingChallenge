@@ -20,7 +20,7 @@ Hope you enjoy it!
 The app interface will allow you to test the operations on the different columns of the provided dataset. 
 However, to see the code for these operations, you can find them at: **DKCodingChallenge > CodingChallenge > CodingChallenge.swift**
 
-If you would like to run these on your own data, you can import a .csv file and change the filename in the *readCSV* function in **DKCodingChallenge > AppSetup > SceneDelegate.swift**. If you want to see how this converts this from .csv format to columns of data for the operations, see **DKCodingChallenge > DataModel > DataService.swift**
+If you would like to run these on your own data, you can import a .csv file and change the filename in the *readCSV* function in **DKCodingChallenge > AppSetup > SceneDelegate.swift**. If you want to see how this converts the .csv file to columns of data for the operations, see **DKCodingChallenge > DataModel > DataService.swift**
 
 **Bonus Question**
 
