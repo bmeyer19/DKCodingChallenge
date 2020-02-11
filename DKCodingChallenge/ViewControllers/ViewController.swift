@@ -15,10 +15,10 @@ class ViewController: UIViewController {
     
     private var logo: UIImageView!
     private var label: DKLabel!
-    private var collectionView : OperationView!
+    private var collectionView: OperationView!
     
-    private let heightMultiplier : CGFloat = 0.725
-    private let verticalInset : CGFloat = 20
+    private let heightMultiplier: CGFloat = 0.725
+    private let verticalInset: CGFloat = 20
     
     // MARK: - Lifecycle
 
