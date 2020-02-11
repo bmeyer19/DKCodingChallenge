@@ -62,26 +62,17 @@ class CodingChallenge {
         }
         var continuousSwingsIndices: [(Int,Int)] = []
         var continuousSwingsStartIndex = 0
-        var continuousSwingsSatisfyingPredicate = 0
         for index in Range(indexBegin...indexEnd) {
-            var allPredicatesSatisfied = true
             for (datasetIndex, (dataset, _)) in data.enumerated() {
-                allPredicatesSatisfied = filteredData[datasetIndex].contains(dataset[index]) && allPredicatesSatisfied
-            }
-            if allPredicatesSatisfied {
-                if continuousSwingsSatisfyingPredicate == 0 {
-                    continuousSwingsStartIndex = index
+                if !filteredData[datasetIndex].contains(dataset[index]) {
+                    if index - continuousSwingsStartIndex >= winLength {
+                        continuousSwingsIndices.append((continuousSwingsStartIndex,index-1))
+                    }
+                    continuousSwingsStartIndex = index + 1
+                    continue
                 }
-                continuousSwingsSatisfyingPredicate += 1
-            } else {
-                if continuousSwingsSatisfyingPredicate >= winLength {
-                    let endIndex = index > 0 ? index : 0
-                    continuousSwingsIndices.append((continuousSwingsStartIndex,endIndex))
-                }
-                continuousSwingsSatisfyingPredicate = 0
             }
         }
-        
         return continuousSwingsIndices
     }
     
