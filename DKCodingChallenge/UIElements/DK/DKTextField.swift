@@ -59,23 +59,9 @@ class DKTextField: UITextField {
         // Creates a transparent view to block the screen behind the keyboard.
         // Dismisses the keyboard when pressed
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        let customView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: UIScreen.main.bounds.height))
-        customView.addGestureRecognizer(tapGesture)
-        
-        // Basic toolbar with done button
-        let flexible = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil)
-        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dismissKeyboard))
-        doneButton.tintColor = .DKAccent
-        let bar = UIToolbar()
-        bar.items = [flexible, doneButton]
-        bar.backgroundColor = .DKBody
-        bar.sizeToFit()
-        customView.addSubview(bar)
-        bar.snp.makeConstraints{ make in
-            make.bottom.left.right.equalToSuperview()
-            make.height.equalTo(44)
-        }
-        inputAccessoryView = customView
+        let accessoryBacking = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: UIScreen.main.bounds.height))
+        accessoryBacking.addGestureRecognizer(tapGesture)
+        inputAccessoryView = accessoryBacking
     }
 
     // MARK: - Functions

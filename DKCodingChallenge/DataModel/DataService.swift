@@ -59,7 +59,7 @@ public class DataService {
             }
         case .backSearchContinuityWithinRange:
             let result = CodingChallenge.shared.backSearchContinuityWithinRange(
-                data: [],
+                data: data,
                 indexBegin: indexBegin,
                 indexEnd: indexEnd,
                 thresholdLo: threshold1,
@@ -72,8 +72,8 @@ public class DataService {
             }
         case .searchContinuityAboveValueTwoSignals:
             let result = CodingChallenge.shared.searchContinuityAboveValueTwoSignals(
-                data1: [],
-                data2: [],
+                data1: data,
+                data2: data2,
                 indexBegin: indexBegin,
                 indexEnd: indexEnd,
                 threshold1: threshold1,
@@ -86,7 +86,7 @@ public class DataService {
             }
         case .searchMultiContinuityWithinRange:
             let result = CodingChallenge.shared.searchMultiContinuityWithinRange(
-                data: [],
+                data: data,
                 indexBegin: indexBegin,
                 indexEnd: indexEnd,
                 thresholdLo: threshold1,

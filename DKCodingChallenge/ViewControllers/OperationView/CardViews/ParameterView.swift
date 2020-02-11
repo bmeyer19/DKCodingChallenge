@@ -200,14 +200,7 @@ class ParameterView: UIView {
         if inputIsValid() {
             testOperation()
         }
-        switch operation {
-        case .searchMultiContinuityWithinRange:
-            scrollToBottom()
-        case .searchContinuityAboveValueTwoSignals:
-            scrollToBottom()
-        default:
-            ()
-        }
+        scrollToBottom()
     }
     
     // MARK: - Functions
@@ -285,7 +278,10 @@ class ParameterView: UIView {
     
     private func scrollToBottom() {
         let bottomOffset: CGPoint = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.size.height + self.scrollView.contentInset.bottom);
-        scrollView.setContentOffset(bottomOffset, animated: true)
+        if bottomOffset.y > 0 {
+            scrollView.setContentOffset(bottomOffset, animated: true)
+        }
+        
     }
     
 }
