@@ -24,7 +24,7 @@ public struct Swing {
     // MARK: - Initializer
     
     // Creates the object from a row of a CSV file
-    public init(swingArray : [Substring.SubSequence]) {
+    public init(swingArray: [Substring.SubSequence]) {
         timestamp = NSNumber(value: Int(swingArray[0]) ?? 0)
         ax = NSNumber(value: Float(swingArray[1]) ?? 0)
         ay = NSNumber(value: Float(swingArray[2]) ?? 0)

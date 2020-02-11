@@ -28,7 +28,7 @@ class CodingChallenge {
         let predicateLo = NSPredicate(format: "floatValue > %@", argumentArray: [thresholdLo])
         let predicateHi = NSPredicate(format: "floatValue < %@", argumentArray: [thresholdHi])
         let predicates = [predicateLo, predicateHi]
-        let compoundPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: predicates)
+        let compoundPredicate = NSCompoundPredicate(type: .and, subpredicates: predicates)
         let indices = continuityHelper(data: [(data, compoundPredicate)], indexBegin: indexEnd, indexEnd: indexBegin, winLength: winLength)
         print(indices)
         return indices.last?.1
@@ -48,25 +48,23 @@ class CodingChallenge {
         let predicateLo = NSPredicate(format: "floatValue > %@", argumentArray: [thresholdLo])
         let predicateHi = NSPredicate(format: "floatValue < %@", argumentArray: [thresholdHi])
         let predicates = [predicateLo, predicateHi]
-        let compoundPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: predicates)
+        let compoundPredicate = NSCompoundPredicate(type: .and, subpredicates: predicates)
         let indices = continuityHelper(data: [(data, compoundPredicate)], indexBegin: indexBegin, indexEnd: indexEnd, winLength: winLength)
         return indices
     }
     
     // Helper function that takes in a list of data-predicate pairs and finds all sequences of at least a certain length within a given range. It filters each dataset with its respective predicate and then checks how many of these filtered values exist consecutively in the unfiltered set. It returns the start and end index for every consecutive sequence of length winLength or greater that satisfies the predicate
     private func continuityHelper(data: [(NSArray,NSPredicate)], indexBegin: Int, indexEnd: Int, winLength: Int) -> [(Int,Int)] {
-        var filteredData: [NSArray] = []
-        for (dataset,predicate) in data {
-            let filteredDataset = NSArray(array: dataset.filtered(using: predicate))
-            filteredData.append(filteredDataset)
-        }
         var continuousSwingsIndices: [(Int,Int)] = []
-        var continuousSwingsStartIndex = 0
+        var continuousSwingsStartIndex = indexBegin
         for index in Range(indexBegin...indexEnd) {
-            for (datasetIndex, (dataset, _)) in data.enumerated() {
-                if !filteredData[datasetIndex].contains(dataset[index]) {
-                    if index - continuousSwingsStartIndex >= winLength {
-                        continuousSwingsIndices.append((continuousSwingsStartIndex,index-1))
+            for (dataset, predicate) in data {
+                let isLastIndex = index == indexEnd
+                let valueInList = !(([dataset[index]] as NSArray).filtered(using: predicate).count == 0)
+                if !valueInList || isLastIndex {
+                    if index - continuousSwingsStartIndex + (isLastIndex && valueInList ? 1 : 0) >= winLength {
+                        continuousSwingsIndices.append((continuousSwingsStartIndex,index - (isLastIndex ? 0 : 1)))
+                        print("appended")
                     }
                     continuousSwingsStartIndex = index + 1
                     continue
@@ -75,10 +73,4 @@ class CodingChallenge {
         }
         return continuousSwingsIndices
     }
-    
-    
-    
-    
-    
-    
 }
