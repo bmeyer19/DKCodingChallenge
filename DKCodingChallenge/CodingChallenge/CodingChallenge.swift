@@ -50,21 +50,21 @@ class CodingChallenge {
         let predicates = [predicateLo, predicateHi]
         let compoundPredicate = NSCompoundPredicate(type: .and, subpredicates: predicates)
         let indices = continuityHelper(data: [(data, compoundPredicate)], indexBegin: indexBegin, indexEnd: indexEnd, winLength: winLength)
+        print(indices)
         return indices
     }
     
-    // Helper function that takes in a list of data-predicate pairs and finds all sequences of at least a certain length within a given range. It filters each dataset with its respective predicate and then checks how many of these filtered values exist consecutively in the unfiltered set. It returns the start and end index for every consecutive sequence of length winLength or greater that satisfies the predicate
+    // Helper function that takes in a list of data-predicate pairs and finds all sequences of at least a certain length within a given range. At each index, it checks all datasets with their respective predicates. As we check, we keep track of how long the sequence has been. If a value fails and the continuity before it is more than winLength values, we add the start and end indices to an array. 
     private func continuityHelper(data: [(NSArray,NSPredicate)], indexBegin: Int, indexEnd: Int, winLength: Int) -> [(Int,Int)] {
         var continuousSwingsIndices: [(Int,Int)] = []
         var continuousSwingsStartIndex = indexBegin
         for index in Range(indexBegin...indexEnd) {
             for (dataset, predicate) in data {
                 let isLastIndex = index == indexEnd
-                let valueInList = !(([dataset[index]] as NSArray).filtered(using: predicate).count == 0)
-                if !valueInList || isLastIndex {
-                    if index - continuousSwingsStartIndex + (isLastIndex && valueInList ? 1 : 0) >= winLength {
+                let valueSatisfiesPredicate = !(([dataset[index]] as NSArray).filtered(using: predicate).count == 0)
+                if !valueSatisfiesPredicate || isLastIndex {
+                    if index - continuousSwingsStartIndex + (isLastIndex && valueSatisfiesPredicate ? 1 : 0) >= winLength {
                         continuousSwingsIndices.append((continuousSwingsStartIndex,index - (isLastIndex ? 0 : 1)))
-                        print("appended")
                     }
                     continuousSwingsStartIndex = index + 1
                     continue
