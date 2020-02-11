@@ -233,27 +233,34 @@ class ParameterView: UIView {
     private func inputIsValid() -> Bool {
         let indexBegin = Int(indexBeginInput.text ?? "0") ?? 0
         let indexEnd = Int(indexEndInput.text ?? "0") ?? 0
+        let winLength = Int(winLengthInput.text ?? "0") ?? 0
         if indexEnd < DataService.shared.getSwingData().count{
             if indexBegin < DataService.shared.getSwingData().count {
                 if let text1 = threshold1Input.text, let text2 = threshold2Input.text {
                     if let _ = Float(text1), let _ = Float(text2) {
-                        switch operation {
-                        case .backSearchContinuityWithinRange:
-                            if indexEnd > indexBegin {
-                                indexEndInput.flash(color: .systemRed)
-                                outputView.flash(color: .systemRed)
-                                outputView.text = "End Index > Begin Index"
-                            } else {
-                                return true
+                        if winLength > 0 {
+                            switch operation {
+                            case .backSearchContinuityWithinRange:
+                                if indexEnd > indexBegin {
+                                    indexEndInput.flash(color: .systemRed)
+                                    outputView.flash(color: .systemRed)
+                                    outputView.text = "End Index > Begin Index"
+                                } else {
+                                    return true
+                                }
+                            default:
+                                if indexEnd < indexBegin {
+                                    indexBeginInput.flash(color: .systemRed)
+                                    outputView.flash(color: .systemRed)
+                                    outputView.text = "Begin Index > End Index"
+                                } else {
+                                    return true
+                                }
                             }
-                        default:
-                            if indexEnd < indexBegin {
-                                indexBeginInput.flash(color: .systemRed)
-                                outputView.flash(color: .systemRed)
-                                outputView.text = "Begin Index > End Index"
-                            } else {
-                                return true
-                            }
+                        } else {
+                            winLengthInput.flash(color: .systemRed)
+                            outputView.flash(color: .systemRed)
+                            outputView.text = "Win Length <= 0"
                         }
                     } else {
                         threshold1Input.flash(color: .systemRed)
@@ -262,7 +269,6 @@ class ParameterView: UIView {
                         outputView.text = "Invalid Threshold"
                     }
                 }
-
             } else {
                 indexBeginInput.flash(color: .systemRed)
                 outputView.flash(color: .systemRed)
