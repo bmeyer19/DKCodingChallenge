@@ -11,7 +11,7 @@ Hope you enjoy it!
 
 1. Download this repository
 2. Open DKCodingChallenge.xcworkspace in Xcode
-3. Set your test device in **Product > Destination** - I recommend connecting a personal device or using an iPhone 11 Simulator
+3. Set your test device in **Product > Destination** - I recommend connecting a personal device or using an iPhone 11 Simulator. If using a simulator, make sure you do not have your hardware keyboard connected in **Hardware > Keyboard > Connect Hardware Keyboard**
 4. Set your development team in **Signing & Capabilities > Signing > Team** - Depending on your development team setup, it is possible that you will need to change more settings at this step
 5. Run the app by pressing **Product > Run**
 
