@@ -53,7 +53,7 @@ class OperationCollectionViewCell: UICollectionViewCell {
         case .test:
             testCardView.isHidden = false
         default:
-            print("no display mode")
+            ()
         }
         setupConstraints()
     }

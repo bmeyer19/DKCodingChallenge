@@ -8,6 +8,83 @@
 
 import Foundation
 
+struct Predicate<Target> {
+    var matches: (Target) -> Bool
+    
+    init(matcher: @escaping (Target) -> Bool) {
+        matches = matcher
+    }
+}
+
+extension Predicate where Target == TodoItem {
+    static var isCompleted: Self {
+        Predicate {
+            $0.isCompleted
+        }
+    }
+}
+
+func ==<T, V: Equatable>(lhs: KeyPath<T, V>, rhs: V) -> Predicate<T> {
+    Predicate { $0[keyPath: lhs] == rhs }
+}
+
+prefix func !<T>(rhs: KeyPath<T, Bool>) -> Predicate<T> {
+    rhs == false
+}
+
+func ><T, V: Comparable>(lhs: KeyPath<T, V>, rhs: V) -> Predicate<T> {
+    Predicate { $0[keyPath: lhs] > rhs }
+}
+
+func <<T, V: Comparable>(lhs: KeyPath<T, V>, rhs: V) -> Predicate<T> {
+    Predicate { $0[keyPath: lhs] < rhs }
+}
+
+func &&<T>(lhs: Predicate<T>, rhs: Predicate<T>) -> Predicate<T> {
+    Predicate { lhs.matches($0) && rhs.matches($0) }
+}
+
+func ||<T>(lhs: Predicate<T>, rhs: Predicate<T>) -> Predicate<T> {
+    Predicate { lhs.matches($0) || rhs.matches($0) }
+}
+
+func ~=<T, V: Collection>(
+    lhs: KeyPath<T, V>, rhs: V.Element
+) -> Predicate<T> where V.Element: Equatable {
+    Predicate { $0[keyPath: lhs].contains(rhs) }
+}
+
+struct TodoList {
+    var name: String
+    private var items = [TodoItem]()
+    
+    init(name: String, items: [TodoItem]) {
+        self.name = name
+        self.items = items
+    }
+    
+    func completed() -> [TodoItem] {
+        items.filter {
+            $0.isCompleted
+        }
+    }
+    
+    func items(matching predicate: Predicate<TodoItem>) -> [TodoItem] {
+        items.filter(predicate.matches)
+    }
+}
+
+struct TodoItem {
+    var isCompleted = false
+    var time = 5
+    
+    init(isCompleted: Bool, time: Int) {
+        self.isCompleted = isCompleted
+        self.time = time
+    }
+}
+
+
 // For csv reading to import the dataset, see DataModel > DataService.swift
 class CodingChallenge {
     
@@ -17,11 +94,43 @@ class CodingChallenge {
 
     // Operation 1: searchContinuityAboveValue(data, indexBegin, indexEnd, threshold, winLength) - from indexBegin to indexEnd, search data for values that are higher than threshold. Return the first index where data has values that meet this criteria for at least winLength samples in a row.
     public func searchContinuityAboveValue(data: NSArray, indexBegin: Int, indexEnd: Int, threshold: Float, winLength: Int) -> Int? {
+        
+        
+        let swingData: [Float] = [0,1,20,3,4,5,3.4,5,34,7,9]
+
+        let list: TodoList = TodoList(name: "list", items: [
+            TodoItem(isCompleted: true, time: 4),
+            TodoItem(isCompleted: false, time: 2),
+            TodoItem(isCompleted: true, time: 3),
+            TodoItem(isCompleted: false, time: 5),
+            TodoItem(isCompleted: true, time: 9),
+            TodoItem(isCompleted: false, time: 1)
+        ])
+        
+        
+        
+        let completedItems = list.items(matching: .isCompleted)
+        let incompleteItems = list.items(matching: \.time > 8)
+        let otherPredicate: Predicate<TodoItem> = \.time > 2
+        let filteredList = list.items(matching: otherPredicate)
+        
+        let aboveThreshold: Predicate<Float> = \.self > 4
+        
+        let withinRange: Predicate<Float> = \.self > 3 && \.self < 6
+        
+        let filteredSwings = swingData.filter(withinRange.matches)
+
+        print(filteredSwings)
+        
+        
+
+        return 0
+        /*
         let predicate = NSPredicate(format: "floatValue > %@", argumentArray: [threshold])
         //let predicate2 = NSPredicate(format: "floatValue < %@", argumentArray: [1])
         let indices = continuityHelper(data: [(data, predicate)], indexBegin: indexBegin, indexEnd: indexEnd, winLength: winLength)
         print(indices)
-        return indices.first?.0
+        return indices.first?.08*/
     }
     // Operation 2: backSearchContinuityWithinRange(data, indexBegin, indexEnd, thresholdLo, thresholdHi, winLength) - from indexBegin to indexEnd (where indexBegin is larger than indexEnd), search data for values that are higher than thresholdLo and lower than thresholdHi. Return the first index where data has values that meet this criteria for at least winLength samples in a row.
     public func backSearchContinuityWithinRange(data: NSArray, indexBegin: Int, indexEnd: Int, thresholdLo: Float, thresholdHi: Float, winLength: Int) -> Int? {
@@ -73,4 +182,5 @@ class CodingChallenge {
         }
         return continuousSwingsIndices
     }
+    
 }

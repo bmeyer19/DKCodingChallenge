@@ -13,10 +13,10 @@ class OperationView: UIView {
     
     // MARK: - Variables
     
-    private var collectionView : UICollectionView!
+    private var collectionView: UICollectionView!
     private let cellId = "operationCell"
-    private var size : CGSize!
-    private var operations : [Operation] = [
+    private var size: CGSize!
+    private var operations: [Operation] = [
         .searchContinuityAboveValue,
         .backSearchContinuityWithinRange,
         .searchContinuityAboveValueTwoSignals,
@@ -54,11 +54,11 @@ class OperationView: UIView {
 
 }
 
-extension OperationView : UICollectionViewDelegate {
+extension OperationView: UICollectionViewDelegate {
     
 }
 
-extension OperationView : UICollectionViewDataSource {
+extension OperationView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return operations.count
     }
